@@ -421,7 +421,7 @@ section{padding:80px 5vw}}
 <section id="lineup">
   <div class="eyebrow rv">The Lineup</div>
   <h2 class="rv">Browse the <span class="red">cars</span></h2>
-  <p class="lead rv">A look at five vehicles associated with Tesla's lineup. This is a historical overview, not a live sales catalogue. Model availability varies by market; Model S and Model X production ended in mid-2026.</p>
+  <p class="lead rv">A look at five vehicles associated with Tesla's lineup. This is a historical overview, not a live sales catalogue. Model availability varies by market; Tesla reported a product sunset for Model S and Model X in mid-2026.</p>
   <div class="stage rv">
     <button class="arrow" id="prev" aria-label="Previous">&larr;</button>
     <div class="showcase"><div id="carArt"></div><div class="info" id="carInfo"></div></div>
@@ -583,7 +583,7 @@ section{padding:80px 5vw}}
     </ul>
     <h3 style="font-size:14px;letter-spacing:.12em;margin:28px 0 12px">OFFICIAL TESLA REFERENCES</h3>
     <ul style="list-style:none;display:grid;gap:9px;padding:0">
-      <li>Model S and Model X production sunset — <a href="https://ir.tesla.com/_flysystem/s3/sec/000162828026066738/tsla-20261021-gen.pdf" target="_blank" rel="noopener">Tesla Q3 2026 Update (PDF)</a></li>
+      <li>Model S and Model X product sunset — <a href="https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm" target="_blank" rel="noopener">Tesla Q3 2026 Form 10-Q (SEC filing)</a></li>
       <li>Vehicle software updates — <a href="https://www.tesla.com/support/software-updates" target="_blank" rel="noopener">Tesla Support</a></li>
       <li>Supercharger network — <a href="https://www.tesla.com/supercharger" target="_blank" rel="noopener">Tesla Supercharger</a></li>
       <li>Charging process and charging-speed factors — <a href="https://www.tesla.com/support/charging/supercharging" target="_blank" rel="noopener">Tesla Supercharging Support</a></li>
@@ -620,8 +620,8 @@ const CARS=[
  {k:'3',n:'Model 3',s:'Electric sedan',d:'Designed to broaden Tesla’s reach with a more accessible sedan. Model 3 is one of the company’s core global vehicle models.',c:['Sedan','Core model','Global'] },
  {k:'y',n:'Model Y',s:'Electric crossover',d:'A practical crossover that shares elements of its platform and technology with Model 3. Model Y is one of Tesla’s core global vehicle models.',c:['Crossover','Practical','Core model']},
  {k:'c',n:'Cybertruck',s:'Electric pickup',d:'An all-electric pickup with angular stainless-steel bodywork and a design that stands apart from conventional pickups.',c:['Pickup','Stainless steel','Distinctive design']},
- {k:'s',end:1,n:'Model S',s:'Former flagship performance sedan',d:'Tesla’s first mass-produced sedan helped establish the brand in the premium electric-vehicle market. Production ended in mid-2026.',c:['Sedan','Legacy model','Flagship']},
- {k:'x',end:1,n:'Model X',s:'Former electric SUV',d:'A large electric SUV recognized for its falcon-wing rear doors. It combined passenger space with the technology and performance associated with Tesla. Production ended in mid-2026.',c:['SUV','Legacy model','Falcon-wing doors']}
+ {k:'s',end:1,n:'Model S',s:'Former flagship performance sedan',d:'Tesla’s first mass-produced sedan helped establish the brand in the premium electric-vehicle market. Tesla reported a product sunset for the Model S and Model X in mid-2026.',c:['Sedan','Legacy model','Flagship']},
+ {k:'x',end:1,n:'Model X',s:'Former electric SUV',d:'A large electric SUV recognized for its falcon-wing rear doors. It combined passenger space with the technology and performance associated with Tesla. Tesla reported a product sunset for the Model S and Model X in mid-2026.',c:['SUV','Legacy model','Falcon-wing doors']}
 ];
 const FILES={s:'2021 Tesla Model S P2 Long Range front right view.jpg',3:'Tesla Model 3 (2023) Auto Zuerich 2023 1X7A1313.jpg',x:'23 Tesla Model X Plaid.jpg',y:'2020 Tesla Model Y (United States) front view NHTSA.jpg',c:'2024 Tesla Cybertruck Foundation Series, front left (Greenwich).jpg'};
 const HASH={s:'b/b6',3:'e/e6',x:'4/4b',y:'d/df',c:'9/95'};
@@ -632,7 +632,7 @@ CARS.forEach(c=>{new Image().src=imgUrls(c.k)[0]});
 let cur=0,busy=false;
 const art=document.getElementById('carArt'),info=document.getElementById('carInfo'),dots=document.getElementById('dots');
 CARS.forEach((_,i)=>{const d=document.createElement('i');d.onclick=()=>show(i);dots.appendChild(d)});
-function fill(i){const c=CARS[i];art.innerHTML='<div class="ph"><img alt="Tesla '+c.n+'" referrerpolicy="no-referrer"></div>';const im=art.querySelector('img');const u=imgUrls(c.k);let t=0;im.onerror=()=>{t++;if(t<u.length)im.src=u[t];else art.innerHTML=ART[c.k]};im.src=u[0];info.innerHTML=`${c.end?'<div class="endtag">Production ended mid-2026</div>':''}<div class="sub">${c.s}</div><h3>${c.n}</h3><p style="color:var(--mut);margin-top:10px">${c.d}</p><div class="chips">${c.c.map(x=>`<span class="chip">${x}</span>`).join('')}</div><div class="credit">Photo: <a href="${pageUrl(c.k)}" target="_blank" rel="noopener">Wikimedia Commons</a></div>`;[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i))}
+function fill(i){const c=CARS[i];art.innerHTML='<div class="ph"><img alt="Tesla '+c.n+'" referrerpolicy="no-referrer"></div>';const im=art.querySelector('img');const u=imgUrls(c.k);let t=0;im.onerror=()=>{t++;if(t<u.length)im.src=u[t];else art.innerHTML=ART[c.k]};im.src=u[0];info.innerHTML=`${c.end?'<div class="endtag">Product sunset: mid-2026</div>':''}<div class="sub">${c.s}</div><h3>${c.n}</h3><p style="color:var(--mut);margin-top:10px">${c.d}</p><div class="chips">${c.c.map(x=>`<span class="chip">${x}</span>`).join('')}</div><div class="credit">Photo: <a href="${pageUrl(c.k)}" target="_blank" rel="noopener">Wikimedia Commons</a></div>`;[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i))}
 function show(i){if(busy||i===cur)return;busy=true;const n=(i+CARS.length)%CARS.length;art.firstChild.classList.add('swap');info.classList.add('swap');
  setTimeout(()=>{cur=n;fill(n);const s=art.firstChild;s.classList.add('swap');requestAnimationFrame(()=>requestAnimationFrame(()=>{s.classList.remove('swap');info.classList.remove('swap');busy=false}))},320)}
 const go=d=>show((cur+d+CARS.length)%CARS.length);
