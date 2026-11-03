@@ -294,6 +294,7 @@ section{padding:80px 5vw}}
 .charge-scene.departing #carG{filter:drop-shadow(0 0 0 rgba(227,25,55,0));transition:filter 2.5s ease}
 .charge-scene.complete #lights{opacity:1;filter:drop-shadow(0 0 16px rgba(255,255,255,.8));transition:opacity 1.6s ease,filter 1.8s ease}
 .charge-scene.complete #portGlow{opacity:1;fill:#3ddc97;transition:opacity 1.4s ease}
+.charge-scene.unplugging #portGlow{opacity:0;transition:opacity 1.5s ease}
 .charge-scene.complete .floor{opacity:1;filter:drop-shadow(0 0 18px rgba(227,25,55,.9));transition:opacity 1.8s ease,filter 1.8s ease}
 .charge-scene.complete #led{fill:#3ddc97}
 .charge-scene #plug{transition:filter .7s ease}
@@ -741,7 +742,7 @@ render();
   }
 
   function reset() {
-    scene.classList.remove('charging', 'connected', 'lights', 'complete', 'departing');
+    scene.classList.remove('charging', 'connected', 'lights', 'complete', 'departing', 'unplugging');
     setCar(CAR_X, 0);
     setCable(0);
     setBattery(0);
@@ -793,6 +794,7 @@ render();
 
     // 5. unplug, pause, then accelerate fully out of the scene
     state.textContent = 'UNPLUGGING';
+    scene.classList.add('unplugging');
     scene.classList.remove('connected');
     if (!await ok(tween(1300, p => setCable(1 - p), token))) return;
     if (!await ok(wait(550))) return;
