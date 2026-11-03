@@ -480,9 +480,7 @@ section{padding:80px 5vw}}
       <path d="M64 126C70 120 82 120 88 126L85 130C82 128 79 127 76 127C73 127 69 128 66 130Z" fill="#e31937"/>
       <path d="M73 128H79L77 142H75Z" fill="#e31937"/>
       <rect id="led" x="64" y="153" width="25" height="3.5" rx="1.75" fill="#e31937"/>
-      <text id="scrText" x="76.5" y="214" text-anchor="middle" fill="#f4f4f5" font-size="8.5" font-weight="600" letter-spacing=".35" font-family="Inter,system-ui,sans-serif">READY</text>
       <path d="M58 291H95V301Q95 305 90 305H63Q58 305 58 301Z" fill="#111216" stroke="#34353d" stroke-width="1"/>
-      <path d="M103 190Q115 188 126 197L130 205Q131 211 125 213L104 218Z" fill="#25262d" stroke="#555660" stroke-width="1.2"/>
       <rect x="34" y="304" width="74" height="6" rx="3" fill="#222228"/>
 
       <!-- car -->
@@ -703,7 +701,7 @@ render();
 
   const $ = id => document.getElementById(id);
   const fill = $('batteryFill'), pct = $('chargePercent'), state = $('chargeState'), replay = $('chargeReplay');
-  const carG = $('carG'), plug = $('plug'), scr = $('scrText');
+  const carG = $('carG'), plug = $('plug');
   const cableOut = $('cableOut'), cableIn = $('cableIn'), cableFlow = $('cableFlow');
   const wheels = [...scene.querySelectorAll('.wheel')];
   const quick = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -750,7 +748,6 @@ render();
     setCar(CAR_X, 0);
     setCable(0);
     setBattery(0);
-    scr.textContent = 'READY';
     state.textContent = 'CONNECTING TO SUPERCHARGER';
   }
 
@@ -776,7 +773,6 @@ render();
 
     // 1. plug leaves the holster and travels to the car
     state.textContent = 'PLUGGING IN';
-    scr.innerHTML = '<tspan x="71" y="159">PLUG</tspan><tspan x="71" y="173">IN</tspan>';
     if (!await ok(tween(1500, p => setCable(p), token))) return;
 
     // 2. connected
