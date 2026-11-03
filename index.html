@@ -468,7 +468,7 @@ section{padding:80px 5vw}}
   <h2 class="rv">You are the <span class="red">CMO</span></h2>
   <div class="scenario rv">
     <span class="badge">HYPOTHETICAL SCENARIO</span>
-    <p>As the electric-vehicle market matures, competitors are closing the gap in technology and performance. Tesla needs to give customers a compelling reason to choose its brand beyond the vehicle itself. <b>What should Tesla focus on to strengthen its long-term differentiation?</b></p>
+    <p>As more automakers enter the electric-vehicle market, Tesla risks losing the uniqueness that once made it stand out. Competitors are offering advanced technology, attractive designs and increasingly competitive EVs. <b>How should Tesla maintain its position as a distinctive and desirable brand?</b></p>
   </div>
   <div class="opts rv" id="opts"></div>
   <div class="vfoot rv">
@@ -581,12 +581,12 @@ fill(0);
 
 /* ---- class vote ---- */
 const OPTS=[
- ['A','Lead with the ecosystem','Highlight the connected ownership experience across vehicles, Supercharging, software and services that makes the Tesla brand more than a car purchase.'],
- ['B','Make innovation tangible','Show how ongoing software updates, engineering and new technology create meaningful benefits in everyday driving.'],
- ['C','Strengthen the brand community','Build stronger relationships through owner stories, events and experiences that turn customers into active brand advocates.']
+ ['A','Expand the product portfolio','Introduce new vehicle categories and models to reach different customer segments, while offering more affordable prices than competing EVs.'],
+ ['B','Reposition the brand','Move beyond being known primarily as an electric-car manufacturer and establish Tesla as a broader technology and sustainable-energy company.'],
+ ['C','Accelerate technological innovation','Increase investment in research and development to introduce meaningful breakthroughs in battery technology, vehicle performance and autonomous-driving capabilities, giving Tesla a competitive advantage that rivals will struggle to match.']
 ];
 const DB_URL='https://tesla-marketing-default-rtdb.firebaseio.com/';
-const KEY='tesla_vote_v4',N=OPTS.length;
+const KEY='tesla_vote_v5',N=OPTS.length;
 const admin=/[?&]admin\b/.test(location.search);
 const box=document.getElementById('opts'),pm=document.getElementById('pm'),stat=document.getElementById('status');
 document.getElementById('adm').style.display=(admin||!DB_URL)?'':'none';
@@ -605,7 +605,7 @@ function render(){const t=counts.reduce((a,b)=>a+b,0),show=mine!==null||t>0;
  stat.textContent=msg}
 function apply(d,merge){if(!merge)counts=Array(N).fill(0);if(d)Object.keys(d).forEach(k=>{if(d[k]!==null&&+k<N)counts[+k]=+d[k]||0})}
 if(DB_URL){
- const es=new EventSource(DB_URL.replace(/\/$/,'')+'/audience_decision_v4.json');
+ const es=new EventSource(DB_URL.replace(/\/$/,'')+'/audience_decision_v5.json');
  es.addEventListener('put',e=>{const d=JSON.parse(e.data);live=true;err=false;
   if(d.path==='/')apply(d.data,false);else{const i=+d.path.replace(/^\//,'').split('/').pop();if(i<N)counts[i]=+d.data||0}render()});
  es.addEventListener('patch',e=>{const d=JSON.parse(e.data);live=true;err=false;apply(d.data,true);render()});
@@ -614,12 +614,12 @@ if(DB_URL){
 btns.forEach((b,i)=>b.onclick=async()=>{
  if(mine!==null&&!pm.checked)return;
  if(DB_URL){
-  try{await fetch(DB_URL.replace(/\/$/,'')+'/audience_decision_v4/'+i+'.json',{method:'PUT',body:JSON.stringify({'.sv':{increment:1}})})}catch(e){err=true;render();return}
+  try{await fetch(DB_URL.replace(/\/$/,'')+'/audience_decision_v5/'+i+'.json',{method:'PUT',body:JSON.stringify({'.sv':{increment:1}})})}catch(e){err=true;render();return}
  }else{counts[i]++;saveLocal()}
  if(!pm.checked){mine=i;saveMine()}
  render()});
 document.getElementById('reset').onclick=async()=>{
- if(DB_URL){try{await fetch(DB_URL.replace(/\/$/,'')+'/audience_decision_v4.json',{method:'PUT',body:JSON.stringify(Array(N).fill(0))})}catch(e){}}
+ if(DB_URL){try{await fetch(DB_URL.replace(/\/$/,'')+'/audience_decision_v5.json',{method:'PUT',body:JSON.stringify(Array(N).fill(0))})}catch(e){}}
  else{counts=Array(N).fill(0);saveLocal()}
  mine=null;saveMine();render()};
 render();
