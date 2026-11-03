@@ -137,8 +137,7 @@ mask-image:linear-gradient(90deg,transparent 0,#000 32%),linear-gradient(180deg,
 .vfoot button{background:none;border:0;color:var(--mut);cursor:pointer;text-decoration:underline;font:inherit}
 footer{text-align:center;color:var(--mut);font-size:13px;padding:50px 5vw 60px;border-top:1px solid var(--line)}
 /* reveal */
-/* Keep content visible even if the scroll-reveal script or IntersectionObserver fails. */
-.rv{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
 .rv.in{opacity:1;transform:none}
 @media(max-width:900px){
 .links{position:fixed;top:60px;left:0;right:0;flex-direction:column;background:rgba(9,9,11,.97);padding:20px 5vw;gap:16px;transform:translateY(-130%);transition:transform .4s var(--ease);border-bottom:1px solid var(--line)}
@@ -269,10 +268,6 @@ section{padding:80px 5vw}}
   }
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
-.lineup-note,.charge-note,.experience-disclaimer{max-width:900px;margin:18px auto 0;color:var(--mut);font-size:12px;line-height:1.7;text-align:center}
-.lineup-note{max-width:760px}
-.charge-note{max-width:850px}
-.experience-disclaimer{max-width:1080px;margin:16px 0 0;text-align:left;font-size:11px}
 /* Charging animation */
 .charge-section{overflow:hidden;background:linear-gradient(180deg,#09090b,#111114 65%,#09090b)}
 .charge-lead{color:var(--mut);margin:12px 0 34px}
@@ -411,13 +406,13 @@ section{padding:80px 5vw}}
     <div class="eyebrow">Marketing Case Study</div>
     <h1>TESLA</h1>
     <p class="tag">Innovation. Performance. A <b>Sustainable</b> Future.</p>
-    <p class="hero-p">Explore Tesla's vehicles, customer experience and selected marketing themes through this educational case study.</p>
+    <p class="hero-p">Discover how Tesla's cutting-edge products, bold branding, and innovative marketing strategies have revolutionized the automotive industry.</p>
     <div class="cta"><a href="#lineup" class="btn red">Explore the Lineup &rarr;</a><a href="#chargeScene" class="btn">See the Charging Experience &rarr;</a></div>
   </div>
   
   <div class="intro">
     <a href="#experience" class="card rv" style="--d:.1s"><h3><span class="dot"></span>THE TESLA EXPERIENCE</h3><p>Follow the journey from discovering a Tesla to driving and charging it.</p><span class="go">Explore the experience &rarr;</span></a>
-    <a href="#lineup" class="card rv" style="--d:.2s"><h3><span class="dot"></span>EXPLORE THE LINEUP</h3><p>Explore five Tesla models, including current and discontinued vehicles.</p><span class="go">Browse cars &rarr;</span></a>
+    <a href="#lineup" class="card rv" style="--d:.2s"><h3><span class="dot"></span>EXPLORE THE LINEUP</h3><p>Browse five models, from the Model 3 to the Cybertruck.</p><span class="go">Browse cars &rarr;</span></a>
     <a href="#chargeScene" class="card rv" style="--d:.3s"><h3><span class="dot"></span>THE CHARGING EXPERIENCE</h3><p>See how Tesla turns electric range into a seamless part of the ownership experience.</p><span class="go">Explore the charge sequence &rarr;</span></a>
     <a href="#decision" class="card rv" style="--d:.4s"><h3><span class="dot"></span>CLASS DECISION</h3><p>A hypothetical crisis. What would you do as Tesla's CMO?</p><span class="go">Cast your vote &rarr;</span></a>
   </div>
@@ -432,34 +427,32 @@ section{padding:80px 5vw}}
     <button class="arrow" id="next" aria-label="Next">&rarr;</button>
   </div>
   <div class="dots" id="dots"></div>
-  <p class="lineup-note">Model availability and configurations vary by market. Model S and Model X are no longer in production; pre-owned inventory may still be available in some regions.</p>
 </section>
 <section id="experience">
   <div class="experience-head">
     <div class="experience-head-copy">
       <div class="eyebrow rv">The Tesla Experience</div>
       <h2 class="rv">More than a <span class="red">car</span></h2>
-      <p class="experience-intro rv">From the first look to delivery, explore key moments in the ownership journey.</p>
+      <p class="experience-intro rv">From the first look to delivery, The key moments of ownership into one streamlined journey.</p>
     </div>
     <div class="experience-count rv"><b>01—04</b> &nbsp; THE JOURNEY</div>
   </div>
   <div class="experience-grid">
     <article class="card rv" data-number="01"><div><span class="step">01 / DISCOVER</span><h3>Discover</h3><p>Explore distinctive design, electric performance and technology built around the driver.</p></div><div class="experience-card-foot"><b>THE FIRST IMPRESSION</b><i></i></div></article>
-    <article class="card rv" data-number="02"><div><span class="step">02 / ORDER</span><h3>Order</h3><p>In markets where available, customers can configure and order vehicles through Tesla's online and direct-sales channels.</p></div><div class="experience-card-foot"><b>A DIRECT PURCHASE</b><i></i></div></article>
+    <article class="card rv" data-number="02"><div><span class="step">02 / ORDER</span><h3>Order</h3><p>Configure and purchase online through a direct, straightforward ordering experience.</p></div><div class="experience-card-foot"><b>A DIRECT PURCHASE</b><i></i></div></article>
     <article class="card rv" data-number="03"><div><span class="step">03 / DRIVE</span><h3>Drive</h3><p>Enjoy responsive performance, connected features and software that can improve over time.</p></div><div class="experience-card-foot"><b>MADE FOR THE ROAD</b><i></i></div></article>
-    <article class="card rv" data-number="04"><div><span class="step">04 / CHARGE</span><h3>Charge</h3><p>Where available, access the Supercharger network through vehicle navigation and the Tesla app.</p></div><div class="experience-card-foot"><b>POWER THE JOURNEY</b><i></i></div></article>
+    <article class="card rv" data-number="04"><div><span class="step">04 / CHARGE</span><h3>Charge</h3><p>Travel with access to the Supercharger network, integrated into the driving experience.</p></div><div class="experience-card-foot"><b>POWER THE JOURNEY</b><i></i></div></article>
   </div>
   <div class="experience-note rv">
     <strong>One connected ownership experience</strong>
-    <span>Direct sales model</span><span>Over-the-air updates</span><span>Supercharger network</span>
+    <span>Direct-to-customer</span><span>Over-the-air updates</span><span>Supercharger network</span>
   </div>
-  <p class="experience-disclaimer">Ordering channels, software features, charging access and vehicle availability can vary by country, vehicle configuration and software version.</p>
 </section>
 
 <section id="charging" class="charge-section">
   <div class="eyebrow rv">The charging experience</div>
   <h2 class="rv">Powering the <span class="red">journey</span></h2>
-  <p class="charge-lead rv">An illustrative look at how a Supercharging session connects the vehicle, charger and driver.</p>
+  <p class="charge-lead rv">Energy, technology and movement — designed as one experience.</p>
 
   <div class="charge-scene rv" id="chargeScene">
     <svg viewBox="0 0 760 350" role="img" aria-label="A Tesla pulls up to a Supercharger, the plug connects, the battery charges, the plug is removed and the car drives away">
@@ -532,8 +525,8 @@ section{padding:80px 5vw}}
       <div class="battery-state" id="chargeState">CONNECTING TO SUPERCHARGER</div>
     </div>
   </div>
-  <p class="charge-note">Illustrative animation only. The battery percentage and sequence do not represent actual charging time, speed or a typical 0–100% session. Charging rates vary by vehicle, battery condition, temperature and state of charge.</p>
 
+  
 <button class="btn charge-replay rv" id="chargeReplay">
     Replay experience ↻
   </button>
@@ -569,19 +562,8 @@ section{padding:80px 5vw}}
   <div class="future-line"></div>
 </section>
 <footer>
-  Tesla Marketing Case Study &middot; Student project &middot; Educational use only.
+  Tesla Marketing Case Study &middot; Student presentation &middot; Educational use only.
   Tesla is a trademark of Tesla, Inc.; this project is not affiliated with Tesla.
-
-  <div style="max-width:900px;margin:24px auto 0;text-align:left;border-top:1px solid var(--line);padding-top:20px">
-    <h3 style="font-size:14px;letter-spacing:.12em;margin-bottom:12px">FACTUAL REFERENCES</h3>
-    <ul style="list-style:none;display:grid;gap:8px;padding:0">
-      <li><a href="https://www.tesla.com/models" target="_blank" rel="noopener">Tesla Model S — official product information and production status</a></li>
-      <li><a href="https://www.tesla.com/modelx" target="_blank" rel="noopener">Tesla Model X — official product information and production status</a></li>
-      <li><a href="https://www.tesla.com/support/software-updates" target="_blank" rel="noopener">Tesla Support — over-the-air software updates</a></li>
-      <li><a href="https://www.tesla.com/supercharger" target="_blank" rel="noopener">Tesla — Supercharger network</a></li>
-      <li><a href="https://www.tesla.com/support/charging/supercharging" target="_blank" rel="noopener">Tesla Support — Supercharging process and charging-rate factors</a></li>
-    </ul>
-  </div>
 
   <div style="max-width:900px;margin:28px auto 0;text-align:left;border-top:1px solid var(--line);padding-top:22px">
     <h3 style="font-size:14px;letter-spacing:.12em;margin-bottom:12px">IMAGE CREDITS</h3>
@@ -625,8 +607,8 @@ const CARS=[
  {k:'3',n:'Model 3',s:'Mass-market sedan',d:'Designed to bring Tesla to a much wider audience. It is the entry point of the lineup and a key driver of volume sales.',c:['Sedan','Entry level','Volume']},
  {k:'y',n:'Model Y',s:'Compact crossover',d:'A practical crossover built on the same ideas as Model 3. It has been one of the brand\'s most important models worldwide.',c:['Crossover','Practical','Best seller']},
  {k:'c',n:'Cybertruck',s:'Stainless-steel pickup',d:'A bold, angular pickup that breaks every design rule. It is as much a marketing statement as a vehicle.',c:['Pickup','Stainless steel','Bold design']},
- {k:'s',end:1,n:'Model S',s:'Flagship performance sedan',d:'A flagship electric sedan that helped establish Tesla's early premium positioning. Model S is no longer in production; pre-owned inventory may still be available in some markets.',c:['Sedan','Luxury','Flagship']},
- {k:'x',end:1,n:'Model X',s:'Family SUV',d:'An electric SUV known for its distinctive falcon-wing rear doors and technology-focused interior. Model X is no longer in production; pre-owned inventory may still be available in some markets.',c:['SUV','Falcon-wing doors','Family']}
+ {k:'s',end:1,n:'Model S',s:'Flagship performance sedan',d:'The car that proved electric vehicles could be fast, long-range and desirable. It was the luxury and technology showcase of the range. Tesla announced in January 2026 that it would end production, and the last cars were built in May 2026.',c:['Sedan','Luxury','Flagship']},
+ {k:'x',end:1,n:'Model X',s:'Family SUV',d:'A large electric SUV known for its distinctive falcon-wing doors. It targeted families and buyers who wanted space plus technology. Tesla ended production in 2026 along with the Model S.',c:['SUV','Falcon-wing doors','Family']}
 ];
 const FILES={s:'2021 Tesla Model S P2 Long Range front right view.jpg',3:'Tesla Model 3 (2023) Auto Zuerich 2023 1X7A1313.jpg',x:'23 Tesla Model X Plaid.jpg',y:'2020 Tesla Model Y (United States) front view NHTSA.jpg',c:'2024 Tesla Cybertruck Foundation Series, front left (Greenwich).jpg'};
 const HASH={s:'b/b6',3:'e/e6',x:'4/4b',y:'d/df',c:'9/95'};
@@ -637,7 +619,7 @@ CARS.forEach(c=>{new Image().src=imgUrls(c.k)[0]});
 let cur=0,busy=false;
 const art=document.getElementById('carArt'),info=document.getElementById('carInfo'),dots=document.getElementById('dots');
 CARS.forEach((_,i)=>{const d=document.createElement('i');d.onclick=()=>show(i);dots.appendChild(d)});
-function fill(i){const c=CARS[i];art.innerHTML='<div class="ph"><img alt="Tesla '+c.n+'" referrerpolicy="no-referrer"></div>';const im=art.querySelector('img');const u=imgUrls(c.k);let t=0;im.onerror=()=>{t++;if(t<u.length)im.src=u[t];else art.innerHTML=ART[c.k]};im.src=u[0];info.innerHTML=`${c.end?'<div class="endtag">Discontinued &middot; No longer in production</div>':''}<div class="sub">${c.s}</div><h3>${c.n}</h3><p style="color:var(--mut);margin-top:10px">${c.d}</p><div class="chips">${c.c.map(x=>`<span class="chip">${x}</span>`).join('')}</div><div class="credit">Photo: <a href="${pageUrl(c.k)}" target="_blank" rel="noopener">Wikimedia Commons</a></div>`;[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i))}
+function fill(i){const c=CARS[i];art.innerHTML='<div class="ph"><img alt="Tesla '+c.n+'" referrerpolicy="no-referrer"></div>';const im=art.querySelector('img');const u=imgUrls(c.k);let t=0;im.onerror=()=>{t++;if(t<u.length)im.src=u[t];else art.innerHTML=ART[c.k]};im.src=u[0];info.innerHTML=`${c.end?'<div class="endtag">Discontinued &middot; Production ended May 2026</div>':''}<div class="sub">${c.s}</div><h3>${c.n}</h3><p style="color:var(--mut);margin-top:10px">${c.d}</p><div class="chips">${c.c.map(x=>`<span class="chip">${x}</span>`).join('')}</div><div class="credit">Photo: <a href="${pageUrl(c.k)}" target="_blank" rel="noopener">Wikimedia Commons</a></div>`;[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i))}
 function show(i){if(busy||i===cur)return;busy=true;const n=(i+CARS.length)%CARS.length;art.firstChild.classList.add('swap');info.classList.add('swap');
  setTimeout(()=>{cur=n;fill(n);const s=art.firstChild;s.classList.add('swap');requestAnimationFrame(()=>requestAnimationFrame(()=>{s.classList.remove('swap');info.classList.remove('swap');busy=false}))},320)}
 const go=d=>show((cur+d+CARS.length)%CARS.length);
