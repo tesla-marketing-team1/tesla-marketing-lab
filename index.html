@@ -724,7 +724,7 @@ render();
   const lerp = (a, b, t) => a + (b - a) * t;
   const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
 
-  let run = 0, started = false;
+  let run = 0, started = false, hasScrolled = false, sceneVisible = false;
 
   // t = 0: plug resting in its holster; t = 1: plug seated in the car's charge port
   function setCable(t) {
@@ -818,18 +818,36 @@ render();
 
   replay.addEventListener('click', play);
 
+  // Do not autoplay on initial page load (especially on tall mobile viewports).
+  // Start only after the visitor scrolls and the animation enters the viewport.
+  const maybeStart = () => {
+    if (hasScrolled && sceneVisible && !started) {
+      started = true;
+      play();
+      if (io) io.disconnect();
+      window.removeEventListener('scroll', onScroll);
+    }
+  };
+  const onScroll = () => {
+    hasScrolled = true;
+    if (!('IntersectionObserver' in window)) {
+      const rect = scene.getBoundingClientRect();
+      sceneVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    }
+    maybeStart();
+  };
+  let io = null;
   if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && !started) {
-        started = true;
-        play();
-        io.disconnect();
-      }
-    }, { threshold: .35 });
+    io = new IntersectionObserver(entries => {
+      sceneVisible = entries.some(entry => entry.isIntersecting);
+      maybeStart();
+    }, { threshold: 0.15 });
     io.observe(scene);
   } else {
-    play();
+    const rect = scene.getBoundingClientRect();
+    sceneVisible = rect.top < window.innerHeight && rect.bottom > 0;
   }
+  window.addEventListener('scroll', onScroll, { passive: true });
   reset();
 })();
 </script>
