@@ -124,7 +124,7 @@ mask-image:linear-gradient(90deg,transparent 0,#000 32%),linear-gradient(180deg,
 .scenario{padding:30px;border:1px solid rgba(227,25,55,.4);border-radius:20px;background:linear-gradient(145deg,rgba(227,25,55,.08),transparent);margin-bottom:26px}
 .scenario .badge{font-size:11px;letter-spacing:.2em;color:var(--red2);margin-bottom:10px;display:block}
 .opts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.opt{display:flex;flex-direction:column}
-.opt{text-align:left;cursor:pointer;color:#fff;font:inherit;position:relative;overflow:hidden}
+.opt{text-align:left;cursor:pointer;color:#fff;font:inherit;position:relative;overflow:hidden;padding:20px 22px}
 .opt .bar{position:absolute;inset:0 auto 0 0;width:0;background:rgba(227,25,55,.22);transition:width .9s var(--ease);z-index:0}
 .opt>*{position:relative;z-index:1}
 .opt h4{font-size:16px;margin-bottom:8px;font-weight:500;padding-right:50px}
@@ -633,9 +633,9 @@ fill(0);
 
 /* ---- class vote ---- */
 const OPTS=[
- ['A','Expand the product portfolio','Introduce new vehicle categories and models to reach different customer segments, while offering more affordable prices than competing EVs.'],
- ['B','Reposition the brand','Move beyond being known primarily as an electric-car manufacturer and establish Tesla as a broader technology and sustainable-energy company.'],
- ['C','Accelerate technological innovation','Increase investment in research and development to introduce meaningful breakthroughs in battery technology, vehicle performance and autonomous-driving capabilities, giving Tesla a competitive advantage that rivals will struggle to match.']
+ ['A','Expand the product portfolio','Add new models for more customer segments, including lower-priced EVs.'],
+ ['B','Reposition the brand','Position Tesla as a technology and clean-energy brand, not just a carmaker.'],
+ ['C','Accelerate technological innovation','Advance battery technology, performance and autonomous driving to stay ahead.']
 ];
 const DB_URL='https://tesla-marketing-default-rtdb.firebaseio.com/';
 const KEY='tesla_vote_v5',N=OPTS.length;
