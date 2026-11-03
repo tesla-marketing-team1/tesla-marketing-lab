@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tesla | Marketing Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Michroma&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#09090b;--panel:rgba(255,255,255,.035);--line:rgba(255,255,255,.1);--red:#e31937;--red2:#ff3b57;--txt:#f2f2f4;--mut:#9a9aa3;--ease:cubic-bezier(.2,.7,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,sans-serif;line-height:1.6;overflow-x:hidden;
+background-image:radial-gradient(ellipse 60% 40% at 80% 0,rgba(227,25,55,.12),transparent 70%),radial-gradient(ellipse 50% 30% at 0 60%,rgba(227,25,55,.06),transparent 70%)}
+h1,h2,h3{font-family:Michroma,Inter,sans-serif;font-weight:400;letter-spacing:.04em}
+a{color:inherit;text-decoration:none}
+nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 5vw;background:rgba(9,9,11,.75);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-family:Michroma;letter-spacing:.35em;font-size:15px;display:flex;align-items:center;gap:14px}.logo svg{width:30px;height:31px;fill:#fff}
+.links{display:flex;gap:28px;font-size:14px;color:var(--mut)}
+.links a{position:relative;padding:6px 0;transition:color .3s}
+.links a:hover,.links a.on{color:#fff}
+.links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--red);box-shadow:0 0 10px var(--red);transform:scaleX(0);transition:transform .35s var(--ease)}
+.links a.on::after{transform:scaleX(1)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:40px;border:1px solid var(--line);font-size:14px;font-weight:500;cursor:pointer;background:none;color:#fff;font-family:inherit;transition:.3s var(--ease)}
+.btn.red{color:#fff;background:linear-gradient(135deg,var(--red),#b5122b);border-color:var(--red);box-shadow:0 0 24px rgba(227,25,55,.35)}
+.btn:hover{transform:translateY(-2px);border-color:var(--red)}
+.btn.red:hover{box-shadow:0 0 34px rgba(227,25,55,.6)}
+.burger{display:none;background:none;border:0;color:#fff;font-size:26px;cursor:pointer}
+section{padding:110px 5vw;max-width:1280px;margin:auto}
+.eyebrow{font-size:12px;letter-spacing:.35em;color:var(--mut);text-transform:uppercase;display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.eyebrow::after{content:"";width:90px;height:1px;background:var(--red)}
+h2{font-size:clamp(24px,3.4vw,40px);margin-bottom:14px}
+.lead{color:var(--mut);max-width:620px;margin-bottom:44px}
+.red{color:var(--red2)}
+/* hero */
+#home{overflow:hidden;max-width:none;min-height:100vh;display:grid;grid-template-columns:1fr 1.1fr;align-items:center;gap:20px;padding-top:130px;position:relative}
+#home h1{font-size:clamp(44px,7.5vw,96px);letter-spacing:.14em;line-height:1;margin-bottom:22px}
+.tag{font-size:clamp(20px,2.4vw,30px);font-weight:300;margin-bottom:18px}
+.tag b{color:var(--red2);font-weight:500}
+.hero-p{color:var(--mut);max-width:440px;margin-bottom:32px}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 55% 45% at 75% 35%,rgba(227,25,55,.18),transparent 70%)}
+.hero-bg::after{content:"";position:absolute;inset:auto 0 0;height:38%;background:linear-gradient(180deg,transparent,var(--bg))}
+.hero-img{position:absolute;right:-4vw;top:64px;width:min(68vw,1150px);height:auto;animation:heroIn 1.4s var(--ease) both;
+-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 32%),linear-gradient(180deg,transparent 0,#000 14%,#000 80%,transparent);-webkit-mask-composite:source-in;
+mask-image:linear-gradient(90deg,transparent 0,#000 32%),linear-gradient(180deg,transparent 0,#000 14%,#000 80%,transparent);mask-composite:intersect}
+@keyframes heroIn{from{opacity:0;transform:scale(1.04) translateX(20px)}to{opacity:1;transform:none}}
+#home>:not(.hero-bg){position:relative;z-index:1}
+@keyframes float{50%{transform:translateY(-10px)}}
+.intro{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px;transition:.4s var(--ease);position:relative}
+.card:hover{border-color:rgba(227,25,55,.6);transform:translateY(-4px);box-shadow:0 10px 40px rgba(227,25,55,.12)}
+.card h3{font-size:12px;letter-spacing:.14em;margin-bottom:10px;display:flex;gap:10px;align-items:center}
+.card p{color:var(--mut);font-size:14px}
+.card .go{display:inline-block;margin-top:14px;font-size:13px;color:var(--red2)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red)}
+/* strategy */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.num{font-family:Michroma;color:var(--red);font-size:13px;margin-bottom:14px}
+.card h4{font-size:17px;font-weight:500;margin-bottom:8px}
+/* 4P */
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.tab{padding:10px 22px;border-radius:30px;border:1px solid var(--line);background:none;color:var(--mut);cursor:pointer;font:500 14px Inter;transition:.3s}
+.tab.on{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 0 20px rgba(227,25,55,.4)}
+.pane{display:none;animation:fade .5s var(--ease)}
+.pane.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.pane ul{list-style:none;display:grid;gap:12px;max-width:760px}
+.pane li{padding:16px 20px;border-left:2px solid var(--red);background:var(--panel);border-radius:0 12px 12px 0;color:#d6d6db}
+.pane li b{color:#fff}
+/* lineup */
+.stage{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px}
+.arrow{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:none;color:#fff;font-size:20px;cursor:pointer;transition:.3s}
+.arrow:hover{border-color:var(--red);box-shadow:0 0 16px rgba(227,25,55,.5)}
+.showcase{display:grid;grid-template-columns:1.3fr 1fr;gap:30px;align-items:center;min-height:320px;padding:30px;border:1px solid rgba(227,25,55,.35);border-radius:22px;background:linear-gradient(145deg,rgba(227,25,55,.07),transparent)}
+.showcase #carArt>*{width:100%;transition:opacity .35s,transform .45s var(--ease)}
+.endtag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(227,25,55,.25);border:1px solid var(--red);padding:5px 12px;border-radius:20px;margin-bottom:12px}
+.ph{border-radius:14px;overflow:hidden;aspect-ratio:3/2;background:#111;border:1px solid var(--line);display:flex;align-items:center}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.credit{font-size:11px;color:var(--mut);margin-top:16px}.credit a{text-decoration:underline}
+
+.showcase .info{transition:opacity .35s,transform .45s var(--ease)}
+.swap{opacity:0;transform:translateX(24px)}
+.showcase h3{font-size:26px;margin-bottom:6px}
+.sub{color:var(--red2);font-size:13px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{font-size:12px;padding:6px 14px;border:1px solid var(--line);border-radius:20px;color:var(--mut)}
+.dots{display:flex;justify-content:center;gap:10px;margin-top:22px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#444;cursor:pointer;transition:.3s}
+.dots i.on{background:var(--red);box-shadow:0 0 10px var(--red);width:22px;border-radius:6px}
+/* swot */
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.swot .card{padding:28px}
+.swot h3{font-size:15px;margin-bottom:16px}
+.swot li{list-style:none;color:#cfcfd5;font-size:14.5px;padding:8px 0 8px 22px;position:relative;border-bottom:1px solid var(--line)}
+.swot li:last-child{border:0}
+.swot li::before{content:"";position:absolute;left:0;top:17px;width:8px;height:8px;border-radius:2px;background:var(--c,var(--red))}
+.S{--c:#3ddc97}.W{--c:#ff3b57}.O{--c:#4aa3ff}.T{--c:#ffb020}
+.swot .S h3{color:#3ddc97}.swot .W h3{color:#ff3b57}.swot .O h3{color:#4aa3ff}.swot .T h3{color:#ffb020}
+/* decision */
+.scenario{padding:30px;border:1px solid rgba(227,25,55,.4);border-radius:20px;background:linear-gradient(145deg,rgba(227,25,55,.08),transparent);margin-bottom:26px}
+.scenario .badge{font-size:11px;letter-spacing:.2em;color:var(--red2);margin-bottom:10px;display:block}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.opt{display:flex;flex-direction:column}
+.opt{text-align:left;cursor:pointer;color:#fff;font:inherit;position:relative;overflow:hidden}
+.opt .bar{position:absolute;inset:0 auto 0 0;width:0;background:rgba(227,25,55,.22);transition:width .9s var(--ease);z-index:0}
+.opt>*{position:relative;z-index:1}
+.opt h4{font-size:16px;margin-bottom:8px;font-weight:500;padding-right:50px}
+.opt h4 span{color:var(--red2);margin-right:8px;font-family:Michroma;font-size:13px}
+.opt .pct{position:absolute;right:20px;top:20px;font-family:Michroma;font-size:15px;opacity:0;transition:opacity .5s}
+.voted .opt .pct{opacity:1}
+.opt.mine{border-color:var(--red)}
+.vfoot{display:flex;justify-content:space-between;align-items:center;margin-top:18px;color:var(--mut);font-size:13px;flex-wrap:wrap;gap:10px}
+.vfoot label{cursor:pointer;display:flex;gap:8px;align-items:center}
+.vfoot button{background:none;border:0;color:var(--mut);cursor:pointer;text-decoration:underline;font:inherit}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:50px 5vw 60px;border-top:1px solid var(--line)}
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+@media(max-width:900px){
+.links{position:fixed;top:60px;left:0;right:0;flex-direction:column;background:rgba(9,9,11,.97);padding:20px 5vw;gap:16px;transform:translateY(-130%);transition:transform .4s var(--ease);border-bottom:1px solid var(--line)}
+.links.open{transform:none}.burger{display:block}nav .btn{display:none}
+#home{grid-template-columns:1fr;padding-top:110px}.hero-img{width:170%;right:-45%;top:90px;opacity:.3}.intro,.grid3,.swot{grid-template-columns:1fr}.opts{grid-template-columns:1fr}
+.showcase{grid-template-columns:1fr}.stage{grid-template-columns:1fr}.arrow{display:flex;align-items:center;justify-content:center;min-width:48px;min-height:48px;cursor:pointer;touch-action:manipulation}
+section{padding:80px 5vw}}
+/* Responsive layout improvements */
+@media(max-width:900px){
+  #home{
+    grid-template-columns:1fr;
+    grid-template-rows:auto auto auto;
+    min-height:auto;
+    padding:110px 5vw 50px;
+    gap:24px;
+  }
+
+  #home > .rv{
+    grid-row:1;
+    max-width:720px;
+  }
+
+  #home > .hero-bg{
+    position:relative;
+    inset:auto;
+    grid-column:1;
+    grid-row:2;
+    height:auto;
+    min-height:0;
+    overflow:hidden;
+  }
+
+  .hero-bg::after{
+    display:none;
+  }
+
+  .hero-img{
+    position:relative;
+    display:block;
+    width:min(100%,720px);
+    height:auto;
+    right:auto;
+    top:auto;
+    margin:0 auto;
+    opacity:1;
+    mask-image:none;
+    -webkit-mask-image:none;
+  }
+
+  .intro{
+    grid-row:3;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .grid3{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .swot{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .opts,
+  .showcase,
+  .stage{
+    grid-template-columns:1fr;
+  }
+
+  .arrow{
+    display:none;
+  }
+
+  section{
+    padding:80px 5vw;
+  }
+}
+
+@media(max-width:600px){
+  nav{
+    padding:12px 5vw;
+  }
+
+  #home{
+    padding-top:100px;
+    gap:20px;
+  }
+
+  #home h1{
+    font-size:clamp(42px,14vw,68px);
+    letter-spacing:.08em;
+  }
+
+  .intro,
+  .grid3,
+  .swot{
+    grid-template-columns:1fr;
+  }
+
+  section{
+    padding:70px 5vw;
+  }
+
+  .showcase{
+    padding:18px;
+    gap:18px;
+  }
+
+  .showcase h3{
+    font-size:22px;
+  }
+
+  .tabs{
+    gap:8px;
+  }
+
+  .tab{
+    padding:9px 15px;
+    font-size:13px;
+  }
+
+  .scenario,
+  .opt{
+    padding:20px;
+  }
+
+  .cta .btn{
+    max-width:100%;
+  }
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+/* Charging animation */
+.charge-section{overflow:hidden;background:linear-gradient(180deg,#09090b,#111114 65%,#09090b)}
+.charge-lead{color:var(--mut);margin:12px 0 34px}
+.charge-scene{position:relative;border:1px solid #29292f;border-radius:18px;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 100%,rgba(227,25,55,.16),transparent 55%),linear-gradient(#111116,#08080a)}
+.charge-scene svg{display:block;width:100%;height:auto}
+.charge-scene .floor{opacity:.25;transition:opacity .8s}
+.charge-scene.charging .floor{opacity:1}
+.charge-scene #led{transition:fill .4s}
+.charge-scene.charging #led{fill:#3ddc97;animation:ledPulse 1.2s ease-in-out infinite}
+.charge-scene #portGlow{opacity:0;transition:opacity .35s}
+.charge-scene.connected #portGlow{opacity:1}
+.charge-scene.charging #portGlow{animation:ledPulse 1.2s ease-in-out infinite}
+.charge-scene #cableFlow{opacity:0;transition:opacity .4s}
+.charge-scene.charging #cableFlow{opacity:1;animation:flow .7s linear infinite}
+.charge-scene #lights{opacity:0;transition:opacity .5s}
+.charge-scene.lights #lights{opacity:1}
+@keyframes flow{to{stroke-dashoffset:-32}}
+@keyframes ledPulse{50%{opacity:.45}}
+.battery-card{position:absolute;right:4%;top:22px;width:210px;padding:18px;background:rgba(15,15,19,.88);border:1px solid #38383f;border-radius:12px;z-index:3}
+.battery-top{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.15em;color:#aaa}
+.battery-top strong{font-size:18px;color:#fff;letter-spacing:0}
+.battery-track{height:7px;background:#303036;border-radius:8px;margin:17px 0 12px;overflow:hidden}
+.battery-track div{height:100%;width:0;background:#e31937;box-shadow:0 0 12px #e31937;transition:width .12s linear}
+.battery-state{font-size:9px;letter-spacing:.12em;color:#aaa}
+.charge-replay{margin-top:22px;cursor:pointer}
+
+/* Cinematic conclusion */
+.future-section {
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: #050506;
+}
+
+.future-glow {
+  position: absolute;
+  inset: auto 0 0;
+  height: 55%;
+  background: radial-gradient(ellipse at 50% 100%,rgba(227,25,55,.25),transparent 65%);
+  pointer-events: none;
+}
+
+.future-section h2 {
+  font-size: clamp(42px,8vw,104px);
+  line-height: .98;
+  letter-spacing: -.055em;
+  margin: 28px 0;
+  position: relative;
+}
+
+.future-section p {
+  color: #aaa;
+  line-height: 1.8;
+  position: relative;
+}
+
+.future-line {
+  height: 2px;
+  width: 100px;
+  background: #e31937;
+  margin-top: 42px;
+  box-shadow: 0 0 20px #e31937;
+}
+
+@media(max-width:650px) {
+  .charge-scene .battery-card {
+    position: static;
+    width: auto;
+    margin: 0 12px 14px;
+  }
+
+  .battery-state {
+    font-size: 8px;
+  }
+
+  .future-section {
+    min-height: 420px;
+  }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#home" class="logo"><svg viewBox="0 0 581 605" aria-hidden="true"><defs><path id="tl" fill-rule="evenodd" d="M288.0 376.5L288.0 148.1L289.5 148.6C292.0 149.6 294.5 146.7 315.5 119.4C318.8 115.1 324.9 107.3 329.1 102.1C333.3 96.8 339.0 89.2 341.9 85.2C349.7 74.5 349.7 74.5 378.7 78.5C396.6 80.9 399.6 81.5 417.0 85.2C465.1 95.5 531.5 118.4 543.2 128.8C549.6 134.4 538.2 147.1 505.1 171.4C503.7 172.5 500.6 175.1 498.3 177.1C493.5 181.5 487.0 185.0 483.7 185.0C481.3 185.0 471.1 178.1 467.5 174.0C460.1 165.8 417.2 155.0 391.3 155.0L386.1 155.0L383.6 157.2L381.2 159.5L377.9 169.5C376.1 175.0 370.6 188.9 365.7 200.5C351.3 234.2 348.5 241.1 345.7 249.0C340.7 263.4 338.0 274.8 336.1 290.6C335.0 299.4 332.3 320.7 330.1 338.0C327.9 355.3 325.0 379.4 323.5 391.5C322.1 403.6 320.3 418.2 319.5 424.0C318.7 429.8 317.6 438.8 317.0 444.0C316.4 449.2 315.7 454.2 315.5 455.0C315.3 455.8 314.4 462.1 313.6 469.0C312.8 475.9 311.6 485.1 311.0 489.5C310.4 493.9 309.0 504.9 307.9 514.0C306.8 523.1 305.5 533.4 305.0 537.0C304.6 540.6 303.5 549.4 302.6 556.5C299.9 577.9 298.1 588.1 295.4 596.8L292.8 605.0L290.4 605.0L288.0 605.0L288.0 376.5ZM540.0 111.9C500.9 93.1 464.6 80.6 425.5 72.5C421.1 71.5 414.8 70.1 411.6 69.3C404.5 67.5 386.7 64.9 359.0 61.6L338.5 59.1L313.2 58.4L288.0 57.7L288.0 28.9L288.0 0.0L311.3 0.0L334.6 0.0L335.7 1.1C336.4 1.8 343.5 2.9 351.7 3.6C428.1 10.5 492.6 28.1 557.2 59.8L581.0 71.5L581.0 76.8C581.0 79.6 580.6 82.0 580.1 82.0C579.6 82.0 577.3 85.7 575.1 90.2C569.5 101.5 562.7 113.5 560.5 116.0L558.7 118.0L555.6 117.9C553.9 117.9 546.9 115.2 540.0 111.9Z"/></defs><use href="#tl"/><use href="#tl" transform="translate(581 0) scale(-1 1)"/></svg><span>TESLA</span></a>
+  <div class="links" id="links">
+    <a href="#home" class="on">Overview</a><a href="#strategy">Marketing Strategy</a><a href="#fourps">4Ps</a><a href="#lineup">Lineup</a><a href="#charging">Charging</a><a href="#decision">Decision</a>
+  </div>
+  <a href="#decision" class="btn" style="padding:9px 22px;border-color:var(--red)">Vote &rarr;</a>
+  <button class="burger" id="burger" aria-label="Menu">&#9776;</button>
+</nav>
+
+<section id="home">
+  <div class="hero-bg"><img class="hero-img" alt="Tesla Model S and lineup in front of a red-lit showroom" src="images/hero.jpg"></div>
+  <div class="rv in">
+    <div class="eyebrow">Marketing Case Study</div>
+    <h1>TESLA</h1>
+    <p class="tag">Innovation. Performance. A <b>Sustainable</b> Future.</p>
+    <p class="hero-p">Discover how Tesla's cutting-edge products, bold branding, and innovative marketing strategies have revolutionized the automotive industry.</p>
+    <div class="cta"><a href="#strategy" class="btn red">Explore the Strategy &rarr;</a><a href="#swot" class="btn">View Analysis</a></div>
+  </div>
+  
+  <div class="intro">
+    <a href="#strategy" class="card rv" style="--d:.1s"><h3><span class="dot"></span>MARKETING STRATEGY</h3><p>A brand built on innovation and vision, not traditional advertising.</p><span class="go">Learn more &rarr;</span></a>
+    <a href="#lineup" class="card rv" style="--d:.2s"><h3><span class="dot"></span>EXPLORE THE LINEUP</h3><p>Browse five models, from the Model 3 to the Cybertruck.</p><span class="go">Browse cars &rarr;</span></a>
+    <a href="#swot" class="card rv" style="--d:.3s"><h3><span class="dot"></span>SWOT ANALYSIS</h3><p>Strengths, weaknesses, opportunities and threats.</p><span class="go">View details &rarr;</span></a>
+    <a href="#decision" class="card rv" style="--d:.4s"><h3><span class="dot"></span>CLASS DECISION</h3><p>A hypothetical crisis. What would you do as Tesla's CMO?</p><span class="go">Cast your vote &rarr;</span></a>
+  </div>
+</section>
+
+<section id="strategy">
+  <div class="eyebrow rv">Marketing Strategy</div>
+  <h2 class="rv">A brand that <span class="red">sells itself</span></h2>
+  <p class="lead rv">Tesla has historically spent very little on traditional advertising. Instead it leans on the product, the story and the community.</p>
+  <div class="grid3">
+    <div class="card rv"><div class="num">01</div><h4>Word of mouth &amp; referrals</h4><p>Owners become the sales force. Referral programs and enthusiastic communities turn customers into advocates.</p></div>
+    <div class="card rv" style="--d:.1s"><div class="num">02</div><h4>Founder-led storytelling</h4><p>Elon Musk's social media presence generates huge free media coverage around every launch and announcement.</p></div>
+    <div class="card rv" style="--d:.2s"><div class="num">03</div><h4>Direct-to-consumer sales</h4><p>Online ordering and company-owned showrooms give Tesla control over price, experience and customer data.</p></div>
+    <div class="card rv"><div class="num">04</div><h4>Mission-driven positioning</h4><p>"Accelerate the world's transition to sustainable energy" gives the brand a purpose beyond the product.</p></div>
+    <div class="card rv" style="--d:.1s"><div class="num">05</div><h4>Software &amp; updates</h4><p>Over-the-air updates keep cars improving after purchase, reinforcing the "tech company" image.</p></div>
+    <div class="card rv" style="--d:.2s"><div class="num">06</div><h4>Ecosystem &amp; Supercharging</h4><p>Charging network, energy products and the app create lock-in and remove range anxiety.</p></div>
+  </div>
+</section>
+
+<section id="fourps">
+  <div class="eyebrow rv">The Marketing Mix</div>
+  <h2 class="rv">The <span class="red">4Ps</span> of Tesla</h2>
+  <div class="tabs rv" id="tabs">
+    <button class="tab on" data-p="0">Product</button><button class="tab" data-p="1">Price</button><button class="tab" data-p="2">Place</button><button class="tab" data-p="3">Promotion</button>
+  </div>
+  <div class="rv">
+    <div class="pane on"><ul><li><b>Electric-first lineup:</b> sedans, SUVs and a pickup, all fully electric.</li><li><b>Technology as the selling point:</b> large touchscreen, Autopilot features, over-the-air updates.</li><li><b>Beyond cars:</b> solar, home batteries and the Supercharger network.</li></ul></div>
+    <div class="pane"><ul><li><b>Premium positioning:</b> priced above most mainstream EVs, with a focus on value through performance and low running costs.</li><li><b>Flexible pricing:</b> prices are adjusted directly and quickly, without dealer negotiation.</li><li><b>Accessible entry point:</b> Model 3 and Model Y aim at the mass market.</li></ul></div>
+    <div class="pane"><ul><li><b>Direct sales:</b> no traditional dealerships; orders are placed online or in Tesla stores.</li><li><b>Prime retail locations:</b> showrooms in malls and busy streets work as brand experiences.</li><li><b>Global delivery and service:</b> Gigafactories and mobile service reduce friction.</li></ul></div>
+    <div class="pane"><ul><li><b>Minimal paid advertising:</b> the brand relies on earned media and organic buzz.</li><li><b>Social media:</b> founder posts, fan communities and launch events draw global attention.</li><li><b>Referral rewards:</b> customers are encouraged to bring in new buyers.</li></ul></div>
+  </div>
+</section>
+
+<section id="lineup">
+  <div class="eyebrow rv">The Lineup</div>
+  <h2 class="rv">Browse the <span class="red">cars</span></h2>
+  <div class="stage rv">
+    <button class="arrow" id="prev" aria-label="Previous">&larr;</button>
+    <div class="showcase"><div id="carArt"></div><div class="info" id="carInfo"></div></div>
+    <button class="arrow" id="next" aria-label="Next">&rarr;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</section>
+
+<section id="charging" class="charge-section">
+  <div class="eyebrow rv">The charging experience</div>
+  <h2 class="rv">Powering the <span class="red">journey</span></h2>
+  <p class="charge-lead rv">Energy, technology and movement — designed as one experience.</p>
+
+  <div class="charge-scene rv" id="chargeScene">
+    <svg viewBox="0 0 760 350" role="img" aria-label="A Tesla pulls up to a Supercharger, the plug connects, the battery charges, the plug is removed and the car drives away">
+      <defs>
+        <linearGradient id="cBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b2b32"/><stop offset=".55" stop-color="#151519"/><stop offset="1" stop-color="#0a0a0c"/></linearGradient>
+        <linearGradient id="cGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3c4452"/><stop offset="1" stop-color="#12151b"/></linearGradient>
+        <linearGradient id="chBody" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#18181d"/><stop offset=".5" stop-color="#3a3a42"/><stop offset="1" stop-color="#16161a"/></linearGradient>
+        <radialGradient id="floorGlow"><stop offset="0" stop-color="#e31937" stop-opacity=".5"/><stop offset="1" stop-color="#e31937" stop-opacity="0"/></radialGradient>
+        <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+
+      <!-- ground -->
+      <ellipse class="floor" cx="400" cy="312" rx="300" ry="15" fill="url(#floorGlow)"/>
+      <line x1="0" y1="310" x2="760" y2="310" stroke="#3a3a42" stroke-width="1.5"/>
+
+      <!-- charger -->
+      <ellipse cx="71" cy="312" rx="46" ry="6" fill="#000" opacity=".5"/>
+      <rect x="40" y="115" width="62" height="195" rx="12" fill="url(#chBody)" stroke="#4a4a52"/>
+      <rect id="led" x="52" y="127" width="38" height="4" rx="2" fill="#e31937"/>
+      <rect x="52" y="142" width="38" height="38" rx="5" fill="#07070a" stroke="#4a4a52"/>
+      <text id="scrText" x="71" y="166" text-anchor="middle" fill="#fff" font-size="11" font-weight="600" letter-spacing=".5" font-family="Inter,system-ui,sans-serif">READY</text>
+      <rect x="102" y="190" width="30" height="20" rx="5" fill="#0c0c0f" stroke="#4a4a52"/>
+      <path d="M74 238l-9 16h7l-3 14 11-18h-7z" fill="#e31937"/>
+      <rect x="34" y="304" width="74" height="6" rx="3" fill="#222228"/>
+
+      <!-- car -->
+      <g id="carG" transform="translate(250 20)">
+        <g id="lights">
+          <path d="M430 224L505 204V252L430 231Z" fill="url(#beam)"/>
+          <path d="M392 219C402 215 416 216 429 225L424 229C412 223 400 222 392 225Z" fill="#fff" filter="url(#glow)"/>
+        </g>
+        <circle cx="82.1" cy="255.5" r="37.5" fill="#050507"/>
+        <circle cx="364.5" cy="255.5" r="37.5" fill="#050507"/>
+        <g transform="translate(-18.64 -22.2) scale(.932)">
+          <path d="M139.5 324.0C140.0 323.2 141.4 320.9 142.6 318.9C159.0 292.6 140.0 259.5 108.5 259.5C80.7 259.5 62.0 284.7 70.8 310.4L72.8 316.2L67.6 315.6C63.2 315.0 49.5 312.0 36.6 308.8C32.4 307.8 26.2 302.1 23.3 296.6C20.6 291.4 19.3 274.4 21.3 271.2C24.9 265.7 26.0 261.8 27.7 248.5L29.3 234.9L27.1 229.5C24.2 222.7 24.7 222.0 32.4 222.0C39.1 222.0 45.5 220.4 56.5 216.0C142.4 181.4 213.1 173.1 277.8 190.0C296.2 194.8 349.3 218.6 370.5 231.6C375.8 234.8 377.6 235.4 385.5 236.0C426.6 239.6 470.6 254.1 489.7 270.5L493.3 273.6L492.1 281.8C491.4 286.3 491.2 291.5 491.6 293.5C492.1 296.3 491.9 297.1 490.4 297.7C486.0 299.3 485.4 307.0 489.5 308.8C492.6 310.2 492.7 312.7 489.8 314.0C486.6 315.4 459.5 321.0 456.1 321.0C454.5 321.0 452.1 321.9 450.7 323.0C447.5 325.6 447.2 325.5 445.9 322.4C445.2 320.4 445.3 319.2 446.4 317.5C452.1 308.8 452.5 291.4 447.2 280.7C432.8 251.6 390.0 251.7 375.7 280.9C369.9 292.9 372.1 315.8 379.6 322.1C382.3 324.3 381.0 325.1 378.1 323.1C375.2 321.0 370.2 320.3 368.4 321.8C367.9 322.3 320.0 322.3 262.0 321.9C170.8 321.2 156.3 321.3 155.4 322.6C153.9 324.4 151.1 324.4 150.4 322.5C149.6 320.4 146.7 320.6 142.4 323.2C139.9 324.7 138.9 324.9 139.5 324.0Z" fill="url(#cBody)" stroke="#e31937" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M30.0 235.5C30.0 233.5 29.3 230.5 28.4 228.8C26.5 225.1 27.1 224.5 34.4 223.6C39.5 223.0 54.7 218.3 59.1 215.9C60.4 215.2 63.1 214.7 65.1 214.9C67.4 215.0 75.2 212.7 86.9 208.5C133.1 191.9 166.6 185.6 208.0 185.5C259.6 185.5 288.7 194.3 342.5 226.5L357.4 235.5L351.7 235.8C346.2 236.1 345.7 235.9 340.1 231.5C271.8 179.0 176.6 174.7 73.5 219.4C66.3 222.6 58.0 226.2 55.0 227.5C52.0 228.8 47.1 230.1 44.1 230.3C38.5 230.8 34.0 234.0 34.0 237.6C34.0 238.4 33.1 239.0 32.0 239.0C30.4 239.0 30.0 238.3 30.0 235.5ZM272.5 233.4C262.1 232.7 250.4 231.7 246.6 231.3L239.7 230.5L235.9 219.0C229.5 200.2 230.2 199.2 246.9 201.5C267.3 204.4 280.7 208.5 300.8 218.1C312.9 223.9 313.0 224.0 311.1 225.9C310.0 227.0 308.8 229.5 308.4 231.4C307.8 235.0 307.7 235.0 302.8 235.0C298.1 235.0 297.8 234.9 298.4 232.8C301.0 223.8 299.5 222.0 295.8 229.7C293.0 235.4 295.4 235.0 272.5 233.4ZM311.2 234.3C308.5 233.8 308.8 230.0 311.7 226.8C315.9 222.2 331.0 227.8 331.0 233.9C331.0 235.0 316.4 235.3 311.2 234.3ZM362.9 233.0C361.4 232.6 352.6 228.2 343.4 223.2C334.1 218.2 320.4 211.3 313.0 208.0C300.8 202.4 293.5 198.0 296.8 198.0C299.9 198.0 357.2 225.3 368.2 232.0L371.5 234.0L368.5 233.9C366.9 233.9 364.3 233.5 362.9 233.0ZM185.0 226.4C177.0 225.6 168.1 224.7 165.1 224.3L159.6 223.5L158.0 214.8C156.1 204.9 155.4 205.9 165.0 204.1C187.3 199.8 210.3 198.8 212.0 201.9C213.5 204.8 213.2 205.8 210.8 206.2C207.7 206.6 206.1 211.6 206.1 220.8L206.0 228.0L202.8 227.9C201.0 227.8 193.0 227.1 185.0 226.4Z" fill="url(#cGlass)"/>
+          <path d="M245.0 318.6L151.5 317.5L151.2 312.8L150.9 308.0L167.2 307.9C183.7 307.8 182.3 305.6 165.3 304.9C162.4 304.8 160.3 304.3 160.6 303.8C160.9 303.4 160.4 303.0 159.5 303.0C158.6 303.0 158.1 302.6 158.5 302.1C158.8 301.6 158.3 300.4 157.4 299.6C156.0 298.1 156.0 298.0 157.8 298.0C158.9 298.0 160.1 298.6 160.4 299.2C160.7 299.9 160.7 299.5 160.4 298.2C160.1 296.9 160.3 296.0 161.0 296.0C161.7 296.0 161.8 295.4 161.0 294.1C159.7 291.6 159.7 288.0 161.0 288.0C161.6 288.0 162.3 288.7 162.6 289.5C163.5 291.6 171.0 299.4 174.2 301.3C178.8 304.2 178.4 303.2 173.3 299.2C170.7 297.1 167.4 293.7 166.0 291.7C164.6 289.7 163.2 288.0 162.8 288.0C162.3 288.0 162.0 287.5 162.0 286.9C162.0 286.2 160.9 284.7 159.4 283.4C158.0 282.1 157.2 281.0 157.5 281.0C157.8 281.0 156.9 279.9 155.4 278.5C153.9 277.1 153.1 276.0 153.6 276.0C154.1 276.0 153.4 275.0 152.0 273.7C148.2 270.4 147.8 259.1 151.2 254.0C155.6 247.5 176.8 245.8 216.4 248.9C224.6 249.5 230.8 249.6 231.4 249.1C232.2 248.5 232.6 250.5 232.7 255.9C232.8 260.1 233.4 264.7 234.0 266.0C234.9 268.2 235.0 268.0 234.5 264.7C233.4 257.6 233.0 250.0 233.8 250.0C240.9 250.2 299.3 254.6 333.0 257.5C351.6 259.2 352.2 259.5 351.5 266.4C350.1 280.1 350.0 282.7 351.3 279.0C352.0 277.1 352.6 271.1 352.5 265.6C352.5 260.1 352.6 256.4 352.8 257.3C353.1 258.6 354.2 259.0 357.1 259.0C359.2 259.0 361.2 259.0 361.5 259.0C361.8 259.0 362.9 259.9 364.0 261.0C366.0 263.0 371.1 262.3 372.6 259.9C372.9 259.4 374.5 260.1 376.2 261.5C380.0 264.7 380.6 264.7 387.6 260.5C393.8 256.8 395.0 256.4 395.0 258.1C395.0 258.7 395.8 259.0 396.8 258.8C397.9 258.5 398.7 258.8 398.7 259.5C398.7 260.2 398.2 260.6 397.5 260.4C396.9 260.1 394.7 261.1 392.6 262.5C390.6 263.9 388.6 265.0 388.2 265.0C385.0 265.0 372.9 282.0 371.5 288.4C371.2 289.8 370.7 292.2 370.4 293.8C369.6 296.9 369.3 299.9 369.1 305.2C369.0 308.6 368.7 309.0 366.2 309.1L363.5 309.2L366.0 309.9C368.2 310.5 368.5 311.2 368.8 315.3L369.1 320.0L353.8 319.8C345.4 319.7 296.4 319.2 245.0 318.6ZM450.7 313.4C453.3 294.4 449.9 280.4 440.2 269.8C438.9 268.4 438.1 266.7 438.4 266.2C438.8 265.6 438.6 264.9 438.0 264.5C437.5 264.2 437.0 263.4 437.0 262.8C437.0 261.0 447.8 272.6 449.8 276.7C454.1 285.0 456.3 296.4 453.8 297.2C453.1 297.5 453.0 298.2 453.4 298.9C454.1 300.0 454.4 300.0 455.1 298.9C455.7 298.0 456.0 299.5 456.0 303.0C456.0 311.7 455.6 311.5 474.5 311.4C483.6 311.4 490.7 311.7 490.2 312.2C489.2 313.2 470.5 316.8 462.5 317.5C459.2 317.8 455.0 318.3 453.2 318.6L449.9 319.2L450.7 313.4ZM62.9 311.6C62.5 311.1 61.0 310.8 54.2 309.5C46.6 308.0 43.1 305.8 38.6 299.6C33.7 293.0 30.5 289.8 29.6 290.7C29.3 291.1 29.0 290.9 29.0 290.3C29.0 289.1 24.2 286.8 23.1 287.4C22.7 287.7 22.3 286.0 22.3 283.7C22.3 281.4 22.0 278.1 21.5 276.4L20.8 273.3L25.7 273.7C28.3 273.9 36.7 274.8 44.4 275.5C61.1 277.3 62.2 277.3 59.8 275.9C55.4 273.4 58.0 273.0 67.5 274.5C69.7 274.9 72.1 275.2 72.8 275.3C73.5 275.3 73.9 275.6 73.8 275.9C73.6 276.2 72.2 278.9 70.7 281.8C69.2 284.6 68.3 287.0 68.6 287.0C69.0 287.0 68.8 287.6 68.2 288.3C66.9 289.8 66.2 294.3 65.4 304.0C65.0 309.9 64.1 312.7 62.9 311.6ZM359.3 309.9C358.3 309.5 353.7 309.0 349.0 308.7C344.3 308.4 341.4 308.3 342.5 308.6C343.6 308.9 344.8 309.5 345.2 309.8C345.6 310.2 349.3 310.5 353.5 310.5C357.6 310.5 360.2 310.3 359.3 309.9ZM334.9 309.5C334.0 308.7 303.7 307.1 302.6 307.8C302.0 308.2 304.0 308.7 307.0 309.0C315.0 309.7 335.4 310.1 334.9 309.5ZM287.3 308.0C285.4 307.2 261.1 306.5 258.5 307.1C257.5 307.4 275.3 308.5 284.5 308.7C288.3 308.8 289.0 308.7 287.3 308.0ZM246.5 307.0C245.4 306.5 239.6 306.2 233.5 306.3L222.5 306.4L231.5 307.0C245.9 308.0 248.8 308.0 246.5 307.0ZM468.4 306.9C468.0 306.1 468.1 306.0 468.8 306.4C470.4 307.4 470.2 305.9 468.5 303.6C466.3 300.7 466.7 299.2 469.8 298.7C472.3 298.3 472.3 298.3 469.2 298.1C467.2 298.1 466.0 297.5 466.0 296.6C466.0 295.4 467.9 295.1 475.4 295.2C485.4 295.2 487.8 295.9 486.4 298.1C485.9 298.9 485.5 299.7 485.5 300.0C485.4 300.3 485.1 302.1 484.7 304.1L484.0 307.7L477.9 306.8C473.7 306.1 471.5 306.2 470.5 307.0C469.5 307.8 469.0 307.8 468.4 306.9ZM214.0 305.9C210.7 305.0 195.8 304.8 196.3 305.8C196.6 306.2 201.2 306.5 206.7 306.6C212.4 306.7 215.5 306.4 214.0 305.9ZM342.9 297.5C340.9 295.5 290.9 288.7 254.1 285.5C244.5 284.6 236.5 283.8 236.3 283.7C236.2 283.5 235.6 280.3 235.1 276.6C233.8 267.5 232.8 266.8 233.6 275.7C234.4 284.6 236.0 284.0 212.1 283.0C191.7 282.1 171.6 283.0 168.3 284.9C165.5 286.4 167.2 286.7 193.5 288.9C238.2 292.6 233.8 292.5 234.3 289.8C234.6 288.4 234.8 289.3 235.0 292.0C235.2 294.5 235.5 295.5 235.7 294.2C236.0 292.5 236.7 292.1 238.3 292.4C239.5 292.7 249.9 293.4 261.5 294.0C273.1 294.7 292.9 295.8 305.5 296.5C331.1 297.9 343.6 298.2 342.9 297.5ZM148.2 287.3C147.6 287.0 147.2 286.5 147.5 286.1C148.1 285.0 143.3 275.0 141.1 272.9C140.2 272.0 138.7 270.1 137.6 268.6C136.6 267.2 135.4 266.3 134.9 266.6C134.4 266.9 133.7 266.4 133.4 265.5C133.0 264.6 130.1 262.6 126.8 260.9C122.1 258.5 119.9 256.0 122.6 256.0C122.9 256.0 122.8 256.4 122.5 257.0C122.2 257.6 122.3 258.0 122.9 258.0C123.4 258.0 124.3 257.3 124.7 256.5C128.2 250.4 151.0 273.5 149.6 281.6C149.3 282.9 149.5 284.0 150.0 284.0C150.8 284.0 150.8 286.6 149.9 287.3C149.7 287.5 148.9 287.5 148.2 287.3ZM76.4 270.5C75.9 269.3 75.5 269.2 74.4 270.1C73.6 270.8 72.7 271.0 72.3 270.6C72.0 270.3 72.3 270.0 73.0 270.0C73.7 270.0 74.0 269.7 73.7 269.3C72.9 268.6 77.8 263.0 79.3 263.0C79.7 263.0 79.2 264.3 78.1 265.8C76.2 268.5 76.2 268.6 78.1 268.7C79.1 268.8 80.2 268.5 80.5 267.9C80.9 267.4 80.6 267.0 79.9 267.0C79.1 267.0 79.1 266.6 80.0 265.5C81.1 264.2 81.5 264.2 82.1 265.2C83.1 266.7 79.2 271.2 77.7 270.3C77.1 270.0 77.0 270.2 77.4 270.8C77.8 271.5 77.9 272.0 77.5 272.0C77.2 272.0 76.7 271.3 76.4 270.5ZM61.9 255.8C62.6 254.8 64.6 254.0 66.3 254.0C71.2 254.0 68.3 252.4 62.5 252.0C61.4 251.9 61.1 251.6 61.8 251.3C64.4 250.3 62.8 249.4 58.5 249.6C56.0 249.7 54.3 249.4 54.6 248.9C55.1 248.0 54.5 247.8 51.0 247.6C48.0 247.4 50.0 245.5 53.6 245.2C63.1 244.3 75.3 250.8 71.7 254.8C70.1 256.5 69.4 256.7 66.9 255.8C64.7 255.0 63.5 255.1 62.2 256.1C60.7 257.4 60.6 257.3 61.9 255.8ZM311.6 254.2C310.9 253.0 314.7 245.7 317.3 243.2C319.9 240.8 320.7 240.6 330.9 240.8L338.2 241.0L333.0 245.8C324.0 253.9 313.9 257.9 311.6 254.2ZM368.3 241.8C368.1 241.3 375.0 241.1 383.7 241.2C399.7 241.4 398.0 241.8 379.2 242.2C373.5 242.4 368.6 242.2 368.3 241.8ZM159.0 233.3C156.5 233.1 149.1 232.3 142.5 231.5C135.8 230.7 128.0 230.0 125.1 230.0C119.1 230.0 118.2 227.7 124.1 227.2C129.0 226.8 162.0 231.6 163.3 232.9C163.9 233.5 164.2 233.9 163.9 233.8C163.7 233.7 161.5 233.5 159.0 233.3ZM151.7 221.7C149.2 219.7 147.9 209.1 150.1 208.0C151.6 207.1 152.0 207.7 153.0 212.8C153.6 215.9 154.2 219.3 154.4 220.2C154.9 222.6 153.7 223.2 151.7 221.7Z" fill="#fff" opacity=".07"/>
+          <path d="M139.5 324.0C140.0 323.2 141.4 320.9 142.6 318.9C149.1 308.4 149.8 292.1 144.2 280.7C132.2 256.3 98.0 251.3 79.4 271.2C76.7 274.1 74.0 276.3 73.5 276.1C73.0 275.9 68.5 274.9 63.5 273.8C51.1 271.2 49.5 269.5 45.6 254.8L43.8 248.1L36.7 248.4L29.5 248.8L28.5 256.1C27.5 263.2 25.2 269.2 23.0 270.5C21.9 271.2 21.6 282.1 22.6 285.6C22.9 286.8 25.1 288.6 27.5 289.8C30.4 291.2 34.0 294.5 37.6 298.9C43.8 306.4 45.0 307.2 55.0 309.5C65.0 311.8 65.0 311.8 65.0 306.2C65.0 299.2 67.6 288.3 70.7 282.3C74.0 275.7 74.8 276.0 71.9 282.6C68.7 289.9 68.2 302.8 70.8 310.4L72.8 316.2L67.6 315.6C63.2 315.0 49.5 312.0 36.6 308.8C32.4 307.8 26.2 302.1 23.3 296.6C20.6 291.4 19.3 274.4 21.3 271.2C24.9 265.7 26.0 261.8 27.7 248.5L29.3 234.9L27.1 229.5C24.4 223.1 25.0 221.6 29.6 222.4C33.8 223.2 44.0 220.9 55.0 216.6C145.6 180.9 212.4 172.9 277.8 190.0C296.2 194.8 349.3 218.6 370.5 231.6C375.8 234.8 377.6 235.4 385.5 236.0C406.9 237.9 431.2 242.7 446.8 248.2C456.7 251.6 484.8 266.3 489.7 270.5L493.3 273.6L492.1 281.8C491.4 286.3 491.2 291.5 491.6 293.5C492.1 296.3 491.9 297.1 490.4 297.7C486.0 299.3 485.4 307.0 489.5 308.8C492.6 310.2 492.7 312.7 489.8 314.0C486.6 315.4 459.5 321.0 456.1 321.0C454.5 321.0 452.1 321.9 450.7 323.0C447.5 325.6 447.2 325.5 445.9 322.4C445.2 320.4 445.3 319.2 446.4 317.5C447.2 316.3 448.6 313.1 449.4 310.4L451.0 305.5L450.5 311.8L450.0 318.0L455.0 318.0C457.7 318.0 466.4 316.9 474.4 315.5C482.4 314.1 489.2 313.0 489.5 313.0C491.2 313.0 489.6 310.1 487.5 309.6C483.9 308.7 483.8 301.0 487.4 297.7C489.4 295.7 489.8 294.3 490.4 284.3L491.1 273.2L487.8 270.7C481.9 266.3 474.2 262.3 476.3 264.7C481.0 270.1 470.1 270.3 459.4 265.0C452.5 261.6 447.4 261.2 439.3 263.3C436.4 264.1 434.3 264.3 434.6 263.9C434.8 263.5 437.4 262.7 440.3 262.1C449.9 260.3 453.5 260.2 455.5 261.6C458.0 263.5 458.9 263.4 458.3 261.2C458.0 259.9 457.0 259.5 454.2 259.6C451.3 259.7 448.8 258.5 442.2 254.2C434.1 248.7 432.9 247.5 435.2 246.8C436.7 246.3 418.9 243.2 409.0 242.3C403.9 241.9 402.3 241.4 404.0 241.0C409.0 239.7 379.2 237.1 359.3 237.0L347.1 237.0L349.3 241.8C352.1 247.7 352.4 287.5 349.8 301.2L348.4 309.0L357.1 309.0C361.9 309.0 366.5 309.2 367.3 309.5C368.4 310.0 368.8 308.4 369.3 301.8C369.9 293.8 372.9 282.7 375.1 280.5C375.7 280.0 375.3 281.5 374.3 284.0C370.1 294.5 373.2 316.7 379.6 322.1C382.3 324.3 381.0 325.1 378.1 323.1C375.2 321.0 370.2 320.3 368.4 321.8C367.9 322.3 320.0 322.3 262.0 321.9C170.8 321.2 156.3 321.3 155.4 322.6C153.8 324.6 150.9 324.3 150.3 322.0C149.6 319.4 148.8 319.5 143.2 322.7C140.6 324.2 139.0 324.8 139.5 324.0ZM369.0 315.6L369.0 311.2L360.2 310.6C355.4 310.3 331.0 309.5 306.0 309.0C247.3 307.7 196.2 306.2 188.0 305.4C175.8 304.3 171.7 301.1 151.8 276.1C146.2 269.2 138.2 259.7 134.0 255.0C124.8 244.9 116.0 233.4 116.0 231.6C116.0 230.9 117.8 228.9 120.0 227.1C124.8 223.2 125.0 222.4 120.8 221.6C116.5 220.8 105.4 215.5 101.2 212.4L98.0 209.9L84.7 215.5C68.9 222.2 67.3 222.8 72.3 220.0C92.4 208.8 134.6 196.3 170.5 190.9C231.5 181.6 291.2 195.5 337.4 229.6C345.9 235.9 346.3 236.1 351.6 235.8L357.0 235.5L341.8 226.3C291.1 195.8 257.6 185.6 208.5 185.6C167.6 185.6 130.3 192.9 84.5 209.7C76.2 212.8 67.5 215.4 65.0 215.5C62.5 215.6 56.0 217.4 50.5 219.5C45.0 221.6 38.0 223.5 35.0 223.9L29.5 224.6L34.0 226.2C36.5 227.1 37.8 227.9 36.9 227.9C36.0 228.0 33.5 227.4 31.3 226.6L27.3 225.2L29.1 230.1C30.2 232.8 31.0 235.9 31.0 237.0C31.0 239.9 32.7 239.4 34.5 236.1C36.7 231.7 39.8 230.0 45.5 230.0C48.3 230.0 51.0 229.6 51.6 229.0C52.8 227.8 67.2 221.9 67.7 222.4C67.9 222.6 64.3 224.3 59.8 226.1L51.5 229.5L60.4 230.0L69.3 230.5L59.6 238.2C54.3 242.5 48.8 246.3 47.5 246.6C44.4 247.4 44.5 248.3 47.8 258.9C51.1 269.3 52.6 270.5 65.0 272.9L74.5 274.7L80.7 268.8C90.0 260.0 96.1 257.5 108.5 257.5C133.5 257.5 149.2 275.3 150.7 305.6L151.3 316.8L179.4 317.4C194.9 317.7 240.6 318.4 281.0 318.8C321.4 319.3 357.8 319.7 361.8 319.8L369.0 320.0L369.0 315.6ZM348.9 298.0C350.8 284.4 351.3 254.5 349.8 247.5L348.5 241.5L333.1 240.8C324.6 240.5 312.5 239.7 306.1 239.1C299.7 238.5 283.9 237.3 271.0 236.5C258.1 235.7 243.4 234.7 238.3 234.4L229.1 233.7L231.0 241.1C233.7 251.4 235.2 268.5 235.4 288.7L235.5 306.0L244.0 306.1C248.7 306.2 273.6 306.7 299.5 307.3C330.8 308.1 346.7 308.2 347.1 307.5C347.5 306.9 348.3 302.7 348.9 298.0ZM469.0 306.5C467.7 305.1 465.6 300.2 464.0 294.8L461.4 285.5L463.9 285.2C469.1 284.5 477.0 286.1 479.8 288.5L482.5 290.8L478.7 291.5C476.6 291.9 472.7 291.9 469.9 291.6C465.4 291.0 465.0 291.1 465.0 293.0C465.0 294.6 465.7 295.0 468.8 295.1C477.7 295.2 481.0 296.8 473.0 297.1C466.2 297.3 466.0 297.4 471.0 297.7C480.7 298.3 482.3 299.4 474.3 300.0L467.1 300.5L468.6 303.7C469.5 305.5 471.4 307.3 472.9 307.9C475.1 308.7 475.2 308.9 473.4 308.9C472.3 309.0 470.3 307.9 469.0 306.5ZM233.4 303.8C234.8 296.7 234.8 291.1 233.5 271.3C232.1 251.7 230.2 239.3 227.9 234.9C227.3 233.7 223.8 233.1 210.8 232.1C186.7 230.4 145.8 226.2 135.2 224.4C126.0 222.8 125.8 222.9 123.9 224.9C122.8 226.1 120.8 227.7 119.5 228.6C118.1 229.5 117.0 230.8 117.0 231.5C117.0 233.1 124.9 243.4 135.1 255.0C139.7 260.2 149.5 271.9 156.9 280.9C176.0 304.2 175.2 303.8 206.5 305.0C216.9 305.4 227.2 305.8 229.2 305.8C232.4 306.0 233.0 305.6 233.4 303.8ZM474.5 266.0C474.9 265.4 473.1 265.0 469.8 265.1C465.3 265.2 464.9 265.4 467.5 266.0C471.9 267.1 473.8 267.1 474.5 266.0ZM363.5 259.9C361.3 258.4 359.0 257.1 358.3 257.0C357.7 257.0 356.8 256.5 356.4 255.8C355.7 254.7 372.7 255.4 373.8 256.5C374.4 257.1 371.1 260.9 369.0 262.0C368.0 262.5 366.2 261.8 363.5 259.9ZM465.0 259.6C465.0 257.9 442.6 248.1 441.4 249.3C441.2 249.5 445.4 251.7 450.8 254.2C462.3 259.7 465.0 260.7 465.0 259.6ZM247.9 247.3C245.8 247.1 243.4 246.0 242.4 244.8L240.5 242.7L244.5 243.4C246.7 243.8 251.6 244.5 255.4 245.0C269.4 246.9 262.8 248.9 247.9 247.3ZM140.4 240.3C139.2 240.1 137.4 239.0 136.4 237.9C134.7 236.1 134.8 236.0 137.3 236.0C138.7 236.0 140.1 236.4 140.4 236.9C140.7 237.3 144.2 238.0 148.1 238.3C158.2 239.2 159.6 241.0 149.9 240.9C145.9 240.8 141.5 240.5 140.4 240.3ZM308.0 232.8C308.0 231.5 308.9 229.0 310.0 227.2L312.0 223.9L299.8 218.0C274.2 205.7 236.4 197.3 232.7 203.2C231.5 205.0 238.3 228.2 240.5 229.9C241.5 230.7 292.8 234.5 293.4 233.9C293.6 233.7 294.7 231.6 295.9 229.2C299.1 222.8 301.8 223.6 299.4 230.2C298.6 232.4 298.0 234.4 298.0 234.6C298.0 234.8 300.2 235.0 303.0 235.0C307.5 235.0 308.0 234.8 308.0 232.8ZM331.0 234.4C331.0 232.5 326.2 227.6 323.2 226.3C316.4 223.5 309.0 227.1 309.0 233.4C309.0 233.9 313.1 234.2 326.8 234.8C329.1 234.9 331.0 234.7 331.0 234.4ZM369.4 233.0C368.0 231.6 324.7 209.9 314.0 205.2C297.1 197.9 297.0 197.9 297.6 199.3C298.1 200.8 300.5 202.0 315.0 208.5C320.2 210.9 330.1 215.8 337.0 219.5C357.1 230.4 361.3 232.4 365.5 233.1C367.7 233.4 369.7 233.8 369.9 233.9C370.2 233.9 370.0 233.6 369.4 233.0ZM205.6 223.1C204.5 215.8 207.3 206.6 211.1 205.1C215.0 203.7 211.5 200.0 206.2 200.0C195.8 200.0 158.9 204.8 157.4 206.3C156.7 206.9 159.6 221.9 160.5 222.8C161.4 223.7 190.4 226.7 199.4 226.9L206.3 227.0L205.6 223.1ZM154.0 220.0C154.0 215.5 151.8 208.0 150.4 208.0C148.7 208.0 148.6 210.2 150.1 217.0C151.2 221.9 154.0 224.2 154.0 220.0ZM139.8 214.3C139.3 211.8 137.0 211.5 137.0 213.9C137.0 215.1 137.6 216.0 138.6 216.0C139.5 216.0 140.0 215.3 139.8 214.3Z" fill="#050507" opacity=".92"/>
+          <path d="M23.1 291.6C22.4 290.8 22.3 289.9 22.8 289.6C24.1 288.9 30.0 290.9 30.0 292.1C30.0 293.5 24.4 293.1 23.1 291.6ZM33.0 245.9C33.0 245.3 32.3 244.2 31.3 243.5C30.4 242.8 30.0 241.8 30.4 241.2C31.3 239.6 34.0 240.9 33.3 242.5C32.9 243.6 33.9 243.9 37.4 243.7L42.0 243.5L42.0 239.2C42.0 235.7 41.7 234.9 40.2 235.1C37.1 235.4 37.0 235.0 39.1 232.9C40.5 231.5 42.1 231.0 44.3 231.2L47.5 231.5L47.5 239.0L47.5 246.5L40.2 246.8C35.2 247.0 33.0 246.7 33.0 245.9Z" fill="#e31937"/>
+          <path d="M463.0 287.4C461.8 284.2 461.8 284.0 463.1 284.0C463.6 284.0 463.8 284.4 463.5 285.0C463.1 285.6 464.8 286.0 467.9 286.0C472.3 286.0 473.0 286.3 473.0 288.0C473.0 291.4 464.3 290.9 463.0 287.4Z" fill="#dbe9ff" opacity=".9"/>
+        </g>
+        <g class="wheel" data-cx="82.1" data-cy="255.5"><circle r="34.5" fill="#0b0b0e" stroke="#3a3a42" stroke-width="3"/><circle r="23" fill="#15151a" stroke="#6a6a74" stroke-width="1.5"/><path d="M0 0L0 -21M0 0L20 -6.5M0 0L12.4 17M0 0L-12.4 17M0 0L-20 -6.5" stroke="#8d8d97" stroke-width="3" stroke-linecap="round"/><circle r="6" fill="#e31937"/></g>
+        <g class="wheel" data-cx="364.5" data-cy="255.5"><circle r="34.5" fill="#0b0b0e" stroke="#3a3a42" stroke-width="3"/><circle r="23" fill="#15151a" stroke="#6a6a74" stroke-width="1.5"/><path d="M0 0L0 -21M0 0L20 -6.5M0 0L12.4 17M0 0L-12.4 17M0 0L-20 -6.5" stroke="#8d8d97" stroke-width="3" stroke-linecap="round"/><circle r="6" fill="#e31937"/></g>
+        <circle cx="14" cy="216" r="7" fill="#050507" stroke="#7a7a82" stroke-width="1.5"/>
+        <circle id="portGlow" cx="14" cy="216" r="3.5" fill="#3ddc97" filter="url(#glow)"/>
+      </g>
+
+      <!-- cable + plug (drawn above the car so the connection is visible) -->
+      <path id="cableOut" fill="none" stroke="#050507" stroke-width="11" stroke-linecap="round"/>
+      <path id="cableIn" fill="none" stroke="#3d3d46" stroke-width="6" stroke-linecap="round"/>
+      <path id="cableFlow" fill="none" stroke="#e31937" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 12" filter="url(#glow)"/>
+      <g id="plug">
+        <rect x="-30" y="-8" width="24" height="16" rx="5" fill="#2e2e35" stroke="#62626c"/>
+        <rect x="-26" y="-2" width="12" height="3" rx="1.5" fill="#e31937"/>
+        <rect x="-6" y="-5" width="9" height="10" rx="2" fill="#cfcfd5"/>
+      </g>
+    </svg>
+
+    <div class="battery-card">
+      <div class="battery-top">
+        <span>BATTERY</span>
+        <strong id="chargePercent">0%</strong>
+      </div>
+      <div class="battery-track">
+        <div id="batteryFill"></div>
+      </div>
+      <div class="battery-state" id="chargeState">CONNECTING TO SUPERCHARGER</div>
+    </div>
+  </div>
+
+  
+<button class="btn charge-replay rv" id="chargeReplay">
+    Replay experience ↻
+  </button>
+</section>
+
+<section id="decision">
+  <div class="eyebrow rv">Audience Decision</div>
+  <h2 class="rv">You are the <span class="red">CMO</span></h2>
+  <div class="scenario rv">
+    <span class="badge">HYPOTHETICAL SCENARIO</span>
+    <p>A video of a Tesla driver-assistance malfunction goes viral and is shared millions of times. Regulators open an inquiry, the media pile on, and online orders slow down in key markets. Tesla has to respond within the week. <b>What is the best marketing response?</b></p>
+  </div>
+  <div class="opts rv" id="opts"></div>
+  <div class="vfoot rv">
+    <span id="status">Choose one option to vote.</span>
+    <span id="adm" style="display:none"><label><input type="checkbox" id="pm"> Presenter mode (count hand-raise votes)</label> <button id="reset">Reset votes</button></span>
+  </div>
+</section> 
+<section id="future" class="future-section">
+  <div class="future-glow"></div>
+  <div class="eyebrow rv">The road ahead</div>
+
+  <h2 class="rv">
+    THE FUTURE<br>
+    <span class="red">ISN'T WAITING.</span>
+  </h2>
+
+  <p class="rv">
+    The shift to electric mobility is already underway.<br>
+    How brands shape that journey will define what comes next.
+  </p>
+
+  <div class="future-line"></div>
+</section>
+<footer>
+  Tesla Marketing Case Study &middot; Student presentation &middot; Educational use only.
+  Tesla is a trademark of Tesla, Inc.; this project is not affiliated with Tesla.
+
+  <div style="max-width:900px;margin:28px auto 0;text-align:left;border-top:1px solid var(--line);padding-top:22px">
+    <h3 style="font-size:14px;letter-spacing:.12em;margin-bottom:12px">IMAGE CREDITS</h3>
+    <p style="margin-bottom:12px">The following images are sourced from Wikimedia Commons. All five have been cropped or resized to fit the website layout.</p>
+    <ul style="list-style:none;display:grid;gap:9px;padding:0">
+      <li>Tesla Model 3 (2023) — Alexander-93 — <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> — <a href="https://commons.wikimedia.org/wiki/File:Tesla_Model_3_(2023)_Auto_Zuerich_2023_1X7A1313.jpg">Source</a></li>
+      <li>Tesla Model Y (2020) — U.S. National Highway Traffic Safety Administration — Public Domain — <a href="https://commons.wikimedia.org/wiki/File:2020_Tesla_Model_Y_(United_States)_front_view_NHTSA.jpg">Source</a></li>
+      <li>Tesla Cybertruck (2024) — Mr.choppers — <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> — <a href="https://commons.wikimedia.org/wiki/File:2024_Tesla_Cybertruck_Foundation_Series,_front_left_(Greenwich).jpg">Source</a></li>
+      <li>Tesla Model S (2021) — Dllu — <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> — <a href="https://commons.wikimedia.org/wiki/File:2021_Tesla_Model_S_P2_Long_Range_front_right_view.jpg">Source</a></li>
+      <li>Tesla Model X Plaid (2023) — HJUdall — CC0 1.0 — <a href="https://commons.wikimedia.org/wiki/File:23_Tesla_Model_X_Plaid.jpg">Source</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+/* ---- car artwork ---- */
+const wheel=(x)=>`<g><circle cx="${x}" cy="128" r="23" fill="#0b0b0d" stroke="#2a2a2e" stroke-width="3"/><circle cx="${x}" cy="128" r="11" fill="none" stroke="#e31937" stroke-width="1.5" opacity=".8"/></g>`;
+const body=(d,win)=>`<svg viewBox="0 0 440 170" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b2b30"/><stop offset="1" stop-color="#0b0b0d"/></linearGradient></defs><ellipse cx="220" cy="154" rx="190" ry="8" fill="#e31937" opacity=".25"/><path d="${d}" fill="url(#g)" stroke="#e31937" stroke-width="1.2"/><path d="${win}" fill="#15151a" stroke="rgba(255,255,255,.25)" stroke-width="1"/>${wheel(105)}${wheel(335)}</svg>`;
+const ART={
+ s:body("M20 125 Q22 100 70 94 L140 68 Q215 44 290 66 L370 92 Q420 98 424 124 L400 138 L350 138 A23 23 0 0 0 304 138 L136 138 A23 23 0 0 0 90 138 L40 138Z","M150 72 Q215 52 282 70 L340 92 L142 92Z"),
+ 3:body("M22 125 Q26 102 74 96 L146 66 Q214 48 280 68 L366 94 Q416 100 422 124 L400 138 L350 138 A23 23 0 0 0 304 138 L136 138 A23 23 0 0 0 90 138 L40 138Z","M154 72 Q214 56 274 72 L330 94 L148 94Z"),
+ x:body("M20 125 Q22 96 66 88 L120 56 Q215 36 306 58 L378 88 Q424 96 424 124 L400 138 L350 138 A23 23 0 0 0 304 138 L136 138 A23 23 0 0 0 90 138 L40 138Z","M128 62 Q215 44 300 64 L352 90 L124 90Z"),
+ y:body("M22 125 Q24 98 70 90 L132 60 Q212 42 292 62 L372 90 Q420 98 422 124 L400 138 L350 138 A23 23 0 0 0 304 138 L136 138 A23 23 0 0 0 90 138 L40 138Z","M140 66 Q212 50 286 68 L338 90 L136 90Z"),
+ c:body("M18 126 L26 100 L150 64 L426 106 L428 126 L400 138 L350 138 A23 23 0 0 0 304 138 L136 138 A23 23 0 0 0 90 138 L40 138Z","M156 70 L330 100 L150 100Z")
+};
+
+/* ---- reveal on scroll ---- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ---- nav ---- */
+const links=document.getElementById('links');
+document.getElementById('burger').onclick=()=>links.classList.toggle('open');
+links.querySelectorAll('a').forEach(a=>a.onclick=()=>links.classList.remove('open'));
+const secs=[...links.querySelectorAll('a')].map(a=>[a,document.querySelector(a.getAttribute('href'))]);
+const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)secs.forEach(([a,s])=>a.classList.toggle('on',s===e.target))}),{rootMargin:'-45% 0px -50% 0px'});
+secs.forEach(([a,s])=>spy.observe(s));
+
+/* ---- 4P tabs ---- */
+const tabs=[...document.querySelectorAll('.tab')],panes=[...document.querySelectorAll('.pane')];
+tabs.forEach((t,i)=>t.onclick=()=>{tabs.forEach((x,j)=>x.classList.toggle('on',i===j));panes.forEach((p,j)=>p.classList.toggle('on',i===j))});
+
+/* ---- car browser ---- */
+const CARS=[
+ {k:'3',n:'Model 3',s:'Mass-market sedan',d:'Designed to bring Tesla to a much wider audience. It is the entry point of the lineup and a key driver of volume sales.',c:['Sedan','Entry level','Volume']},
+ {k:'y',n:'Model Y',s:'Compact crossover',d:'A practical crossover built on the same ideas as Model 3. It has been one of the brand\'s most important models worldwide.',c:['Crossover','Practical','Best seller']},
+ {k:'c',n:'Cybertruck',s:'Stainless-steel pickup',d:'A bold, angular pickup that breaks every design rule. It is as much a marketing statement as a vehicle.',c:['Pickup','Stainless steel','Bold design']},
+ {k:'s',end:1,n:'Model S',s:'Flagship performance sedan',d:'The car that proved electric vehicles could be fast, long-range and desirable. It was the luxury and technology showcase of the range. Tesla announced in January 2026 that it would end production, and the last cars were built in May 2026.',c:['Sedan','Luxury','Flagship']},
+ {k:'x',end:1,n:'Model X',s:'Family SUV',d:'A large electric SUV known for its distinctive falcon-wing doors. It targeted families and buyers who wanted space plus technology. Tesla ended production in 2026 along with the Model S.',c:['SUV','Falcon-wing doors','Family']}
+];
+const FILES={s:'2021 Tesla Model S P2 Long Range front right view.jpg',3:'Tesla Model 3 (2023) Auto Zuerich 2023 1X7A1313.jpg',x:'23 Tesla Model X Plaid.jpg',y:'2020 Tesla Model Y (United States) front view NHTSA.jpg',c:'2024 Tesla Cybertruck Foundation Series, front left (Greenwich).jpg'};
+const HASH={s:'b/b6',3:'e/e6',x:'4/4b',y:'d/df',c:'9/95'};
+const q=f=>encodeURIComponent(f.replace(/ /g,'_'));
+const imgUrls=k=>{const f=FILES[k].replace(/ /g,'_');return['https://upload.wikimedia.org/wikipedia/commons/thumb/'+HASH[k]+'/'+q(f)+'/960px-'+q(f),'https://commons.wikimedia.org/wiki/Special:FilePath/'+q(f)+'?width=960']};
+const pageUrl=k=>'https://commons.wikimedia.org/wiki/File:'+q(FILES[k]);
+CARS.forEach(c=>{new Image().src=imgUrls(c.k)[0]});
+let cur=0,busy=false;
+const art=document.getElementById('carArt'),info=document.getElementById('carInfo'),dots=document.getElementById('dots');
+CARS.forEach((_,i)=>{const d=document.createElement('i');d.onclick=()=>show(i);dots.appendChild(d)});
+function fill(i){const c=CARS[i];art.innerHTML='<div class="ph"><img alt="Tesla '+c.n+'" referrerpolicy="no-referrer"></div>';const im=art.querySelector('img');const u=imgUrls(c.k);let t=0;im.onerror=()=>{t++;if(t<u.length)im.src=u[t];else art.innerHTML=ART[c.k]};im.src=u[0];info.innerHTML=`${c.end?'<div class="endtag">Discontinued &middot; Production ended May 2026</div>':''}<div class="sub">${c.s}</div><h3>${c.n}</h3><p style="color:var(--mut);margin-top:10px">${c.d}</p><div class="chips">${c.c.map(x=>`<span class="chip">${x}</span>`).join('')}</div><div class="credit">Photo: <a href="${pageUrl(c.k)}" target="_blank" rel="noopener">Wikimedia Commons</a></div>`;[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i))}
+function show(i){if(busy||i===cur)return;busy=true;const n=(i+CARS.length)%CARS.length;art.firstChild.classList.add('swap');info.classList.add('swap');
+ setTimeout(()=>{cur=n;fill(n);const s=art.firstChild;s.classList.add('swap');requestAnimationFrame(()=>requestAnimationFrame(()=>{s.classList.remove('swap');info.classList.remove('swap');busy=false}))},320)}
+const go=d=>show((cur+d+CARS.length)%CARS.length);
+document.getElementById('prev').onclick=()=>go(-1);document.getElementById('next').onclick=()=>go(1);
+addEventListener('keydown',e=>{if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1)});
+
+// Mobile swipe navigation
+let touchStartX = 0;
+let touchStartY = 0;
+
+art.addEventListener('touchstart', e => {
+  const touch = e.changedTouches[0];
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
+}, { passive: true });
+
+art.addEventListener('touchend', e => {
+  const touch = e.changedTouches[0];
+  const dx = touch.clientX - touchStartX;
+  const dy = touch.clientY - touchStartY;
+
+  if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+
+  if (dx < 0) go(1);
+  else go(-1);
+}, { passive: true });
+fill(0);
+
+/* ---- class vote ---- */
+const OPTS=[
+ ['A','Radical transparency','Publish the full investigation, apologise publicly, and push a free software fix to every car.'],
+ ['B','Price and incentive push','Keep the message on the product: cut prices, add free charging and extend warranties to win back buyers.'],
+ ['C','Change the narrative','Launch a sustainability and innovation campaign, using owner stories and ambassadors to shift focus.']
+];
+const DB_URL='https://tesla-marketing-default-rtdb.firebaseio.com/';
+const KEY='tesla_vote_v2',N=OPTS.length;
+const admin=/[?&]admin\b/.test(location.search);
+const box=document.getElementById('opts'),pm=document.getElementById('pm'),stat=document.getElementById('status');
+document.getElementById('adm').style.display=(admin||!DB_URL)?'':'none';
+box.innerHTML=OPTS.map((o,i)=>`<button class="card opt" data-i="${i}"><div class="bar"></div><span class="pct">0%</span><h4><span>${o[0]}</span>${o[1]}</h4><p style="color:var(--mut);font-size:14px;padding-right:44px">${o[2]}</p></button>`).join('');
+const btns=[...box.children];
+let counts=Array(N).fill(0),mine=null,live=false,err=false;
+try{const m=localStorage.getItem(KEY+'_mine');if(m!==null)mine=+m}catch(e){}
+if(!DB_URL){try{const c=JSON.parse(localStorage.getItem(KEY+'_c'));if(Array.isArray(c)&&c.length===N)counts=c}catch(e){}}
+const saveLocal=()=>{try{localStorage.setItem(KEY+'_c',JSON.stringify(counts))}catch(e){}};
+const saveMine=()=>{try{mine===null?localStorage.removeItem(KEY+'_mine'):localStorage.setItem(KEY+'_mine',mine)}catch(e){}};
+function render(){const t=counts.reduce((a,b)=>a+b,0),show=mine!==null||t>0;
+ box.classList.toggle('voted',show);
+ btns.forEach((b,i)=>{const p=t?Math.round(counts[i]/t*100):0;b.querySelector('.pct').textContent=p+'%';b.querySelector('.bar').style.width=show?p+'%':'0';b.classList.toggle('mine',mine===i)});
+ let msg=t?`${t} vote${t>1?'s':''} counted`+(mine!==null?' \u00b7 You voted':''):'Choose one option to vote.';
+ if(DB_URL)msg=err?'Connection lost. Retrying...':(live?'\u25cf Live \u00b7 ':'Connecting... ')+(live?msg:'');
+ stat.textContent=msg}
+function apply(d,merge){if(!merge)counts=Array(N).fill(0);if(d)Object.keys(d).forEach(k=>{if(d[k]!==null&&+k<N)counts[+k]=+d[k]||0})}
+if(DB_URL){
+ const es=new EventSource(DB_URL.replace(/\/$/,'')+'/counts.json');
+ es.addEventListener('put',e=>{const d=JSON.parse(e.data);live=true;err=false;
+  if(d.path==='/')apply(d.data,false);else{const i=+d.path.slice(1);if(i<N)counts[i]=+d.data||0}render()});
+ es.addEventListener('patch',e=>{const d=JSON.parse(e.data);live=true;err=false;apply(d.data,true);render()});
+ es.onerror=()=>{err=true;render()};
+}
+btns.forEach((b,i)=>b.onclick=async()=>{
+ if(mine!==null&&!pm.checked)return;
+ if(DB_URL){
+  try{await fetch(DB_URL.replace(/\/$/,'')+'/counts/'+i+'.json',{method:'PUT',body:JSON.stringify({'.sv':{increment:1}})})}catch(e){err=true;render();return}
+ }else{counts[i]++;saveLocal()}
+ if(!pm.checked){mine=i;saveMine()}
+ render()});
+document.getElementById('reset').onclick=async()=>{
+ if(DB_URL){try{await fetch(DB_URL.replace(/\/$/,'')+'/counts.json',{method:'PUT',body:JSON.stringify(Array(N).fill(0))})}catch(e){}}
+ else{counts=Array(N).fill(0);saveLocal()}
+ mine=null;saveMine();render()};
+render();
+/* ---- charging animation ---- */
+(() => {
+  const scene = document.getElementById('chargeScene');
+  if (!scene) return;
+
+  const $ = id => document.getElementById(id);
+  const fill = $('batteryFill'), pct = $('chargePercent'), state = $('chargeState'), replay = $('chargeReplay');
+  const carG = $('carG'), plug = $('plug'), scr = $('scrText');
+  const cableOut = $('cableOut'), cableIn = $('cableIn'), cableFlow = $('cableFlow');
+  const wheels = [...scene.querySelectorAll('.wheel')];
+  const quick = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const CAR_X = 250, CAR_Y = 20, PORT = { x: CAR_X + 14, y: CAR_Y + 216 };
+  const HOLSTER = { x: 134, y: 200 };   // plug tip when resting
+  const BASE = { x: 103, y: 222 };      // where the cable leaves the charger
+  const PLUG_LEN = 30;
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+  let run = 0, started = false;
+
+  // t = 0: plug resting in its holster; t = 1: plug seated in the car's charge port
+  function setCable(t) {
+    const e = ease(t);
+    const tip = {
+      x: lerp(HOLSTER.x, PORT.x - 8, e),
+      y: lerp(HOLSTER.y, PORT.y, e) - Math.sin(Math.PI * t) * 55
+    };
+    const rear = { x: tip.x - PLUG_LEN, y: tip.y };
+    const c1 = { x: BASE.x + 14 + 45 * t, y: Math.min(300, BASE.y + 6 + 40 * t) };
+    const c2 = { x: rear.x - 6 - 40 * t, y: Math.min(300, rear.y + 26 * t) };
+    const d = `M${BASE.x} ${BASE.y} C${c1.x} ${c1.y} ${c2.x} ${c2.y} ${rear.x} ${rear.y}`;
+    cableOut.setAttribute('d', d);
+    cableIn.setAttribute('d', d);
+    cableFlow.setAttribute('d', d);
+    plug.setAttribute('transform', `translate(${tip.x} ${tip.y})`);
+  }
+
+  function setCar(x, spin) {
+    carG.setAttribute('transform', `translate(${x} ${CAR_Y})`);
+    wheels.forEach(w => w.setAttribute('transform', `translate(${w.dataset.cx} ${w.dataset.cy}) rotate(${spin})`));
+  }
+
+  function setBattery(n) {
+    fill.style.width = n + '%';
+    pct.textContent = n + '%';
+    scr.textContent = n >= 100 ? 'FULL' : n + '%';
+  }
+
+  function reset() {
+    scene.classList.remove('charging', 'connected', 'lights');
+    setCar(CAR_X, 0);
+    setCable(0);
+    setBattery(0);
+    scr.textContent = 'READY';
+    state.textContent = 'CONNECTING TO SUPERCHARGER';
+  }
+
+  const wait = ms => new Promise(r => setTimeout(() => r(true), quick ? 0 : ms));
+  function tween(ms, fn, token) {
+    return new Promise(res => {
+      const t0 = performance.now();
+      (function step(now) {
+        if (token !== run) return res(false);
+        const p = quick ? 1 : Math.min(1, (now - t0) / ms);
+        fn(p);
+        p < 1 ? requestAnimationFrame(step) : res(true);
+      })(t0);
+    });
+  }
+
+  async function play() {
+    const token = ++run;
+    reset();
+    const ok = async p => (await p) && token === run;
+
+    if (!await ok(wait(600))) return;
+
+    // 1. plug leaves the holster and travels to the car
+    state.textContent = 'PLUGGING IN';
+    scr.textContent = 'PLUG IN';
+    if (!await ok(tween(1500, p => setCable(p), token))) return;
+
+    // 2. connected
+    scene.classList.add('connected');
+    state.textContent = 'CONNECTED';
+    if (!await ok(wait(650))) return;
+
+    // 3. charging
+    scene.classList.add('charging');
+    state.textContent = 'CHARGING';
+    if (!await ok(tween(5200, p => setBattery(Math.round(p * 100)), token))) return;
+
+    // 4. done, unplug and put the plug back
+    scene.classList.remove('charging');
+    state.textContent = 'CHARGING COMPLETE';
+    if (!await ok(wait(900))) return;
+    state.textContent = 'UNPLUGGING';
+    scr.textContent = 'DONE';
+    scene.classList.remove('connected');
+    if (!await ok(tween(1300, p => setCable(1 - p), token))) return;
+    if (!await ok(wait(450))) return;
+
+    // 5. the car drives off
+    state.textContent = 'READY FOR THE ROAD';
+    scene.classList.add('lights');
+    if (!await ok(wait(500))) return;
+    await tween(2800, p => {
+      const e = p * p * (1.6 - .6 * p);
+      const dist = e * 900;
+      setCar(CAR_X + dist, dist / (2 * Math.PI * 34) * 360);
+    }, token);
+  }
+
+  replay.addEventListener('click', play);
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !started) {
+        started = true;
+        play();
+        io.disconnect();
+      }
+    }, { threshold: .35 });
+    io.observe(scene);
+  } else {
+    play();
+  }
+  reset();
+})();
+</script>
+</body>
+</html>
