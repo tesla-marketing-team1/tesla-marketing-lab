@@ -54,24 +54,33 @@ mask-image:linear-gradient(90deg,transparent 0,#000 32%),linear-gradient(180deg,
 .card p{color:var(--mut);font-size:14px}
 .card .go{display:inline-block;margin-top:14px;font-size:13px;color:var(--red2)}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red)}
-/* strategy */
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.experience-intro{max-width:680px;margin:14px 0 34px;color:var(--mut);font-size:15px;line-height:1.8}
-.experience-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px;row-gap:24px;max-width:960px;margin:0;position:relative}\n.experience-grid::before{content:"";position:absolute;left:calc(50% - .5px);top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,transparent,rgba(227,25,55,.85) 12%,rgba(227,25,55,.85) 88%,transparent);pointer-events:none}\n.experience-grid .card:nth-child(even){margin-left:8px}
-.experience-grid .card{min-height:176px;display:flex;flex-direction:column;justify-content:center;padding:28px 32px;aspect-ratio:auto;border-radius:12px;overflow:hidden;background:#111114;border:1px solid #29292f;box-shadow:none;transition:border-color .3s,background .3s,transform .3s}
-.experience-grid .card::after{content:none}
-.experience-grid .card .step{font-family:Michroma, sans-serif;font-size:10px;letter-spacing:.16em;color:var(--red2);margin-bottom:18px}
-.experience-grid .card h3{display:flex;position:relative;z-index:1;color:#fff;font-size:17px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:11px;align-items:center;gap:0}
-.experience-grid .card h3::before{content:none}
-.experience-grid .card:hover{border-color:rgba(227,25,55,.65);background:#151518;box-shadow:none;transform:translateY(-3px)}
-.experience-grid .card p{position:relative;z-index:1;font-size:14px;line-height:1.75;color:#aaa;max-width:390px}
-.experience-note{max-width:960px;margin:28px 0 0;padding:20px 0 0;border-top:1px solid #29292f;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;color:var(--mut);font-size:10px;letter-spacing:.16em;text-transform:uppercase}
-.experience-note span{display:flex;align-items:center;gap:10px}
+/* Tesla experience */
+#experience{position:relative;isolation:isolate;max-width:none;padding-left:max(5vw,calc((100vw - 1120px)/2));padding-right:max(5vw,calc((100vw - 1120px)/2));overflow:hidden}
+#experience::before{content:"";position:absolute;z-index:-1;inset:4% -10% 0;background:radial-gradient(ellipse 48% 42% at 12% 28%,rgba(227,25,55,.12),transparent 72%),radial-gradient(ellipse 40% 45% at 90% 78%,rgba(227,25,55,.07),transparent 72%)}
+.experience-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:34px}
+.experience-head-copy{max-width:720px}
+.experience-head h2{margin-bottom:10px}
+.experience-intro{max-width:660px;margin:0;color:var(--mut);font-size:15px;line-height:1.8}
+.experience-count{flex:none;padding:12px 16px;border:1px solid rgba(227,25,55,.35);border-radius:4px;color:#d8d8dc;font-family:Michroma,sans-serif;font-size:10px;letter-spacing:.16em}
+.experience-count b{color:var(--red2);font-weight:400}
+.experience-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 54px;max-width:1080px;margin:0;position:relative}
+.experience-grid::before{content:"";position:absolute;left:calc(50% - .5px);top:22px;bottom:22px;width:1px;background:linear-gradient(to bottom,transparent,rgba(227,25,55,.8) 12%,rgba(227,25,55,.8) 88%,transparent);pointer-events:none}
+.experience-grid .card{min-height:220px;display:flex;flex-direction:column;justify-content:space-between;position:relative;padding:28px 32px 25px;overflow:hidden;border-radius:5px;background:linear-gradient(135deg,rgba(26,26,31,.98),rgba(14,14,17,.98));border:1px solid #303037;box-shadow:0 16px 40px rgba(0,0,0,.16);transition:border-color .3s,background .3s,transform .3s}
+.experience-grid .card::before{content:"";position:absolute;inset:0 auto 0 0;width:2px;background:linear-gradient(180deg,var(--red),rgba(227,25,55,.08));opacity:.9}
+.experience-grid .card::after{content:attr(data-number);position:absolute;right:22px;top:12px;font-family:Michroma,sans-serif;font-size:76px;line-height:1;color:rgba(255,255,255,.035);pointer-events:none}
+.experience-grid .card:nth-child(even){margin-left:8px}
+.experience-grid .card:hover{border-color:rgba(227,25,55,.65);background:linear-gradient(135deg,#1b171b,#111114);box-shadow:0 18px 46px rgba(0,0,0,.25);transform:translateY(-4px)}
+.experience-grid .card .step{display:flex;align-items:center;gap:12px;font-family:Michroma,sans-serif;font-size:9px;letter-spacing:.18em;color:var(--red2);margin-bottom:24px}
+.experience-grid .card .step::after{content:"";width:34px;height:1px;background:rgba(227,25,55,.65)}
+.experience-grid .card h3{display:block;position:relative;z-index:1;color:#fff;font-family:Michroma,sans-serif;font-size:19px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px}
+.experience-grid .card p{position:relative;z-index:1;font-size:14px;line-height:1.8;color:#aaa;max-width:420px}
+.experience-card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:22px;padding-top:13px;border-top:1px solid rgba(255,255,255,.08);color:#777780;font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+.experience-card-foot b{color:#d8d8dc;font-weight:500}
+.experience-card-foot i{width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 10px rgba(227,25,55,.6)}
+.experience-note{max-width:1080px;margin:30px 0 0;padding:22px 26px;border:1px solid #29292f;background:rgba(255,255,255,.018);display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:18px;align-items:center;color:var(--mut);font-size:10px;letter-spacing:.13em;text-transform:uppercase}
+.experience-note strong{color:#eee;font-size:10px;font-weight:500;letter-spacing:.16em}
+.experience-note span{display:flex;align-items:center;gap:10px;white-space:nowrap}
 .experience-note span::before{content:"";width:16px;height:1px;background:var(--red);flex:none}
-.experience-note strong{grid-column:1/-1;color:#eee;font-size:11px;font-weight:500;letter-spacing:.18em}
-.experience-note span:last-child{color:var(--mut)}
-.num{font-family:Michroma;color:var(--red);font-size:13px;margin-bottom:14px}
-.card h4{font-size:17px;font-weight:500;margin-bottom:8px}
 /* 4P */
 .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
 .tab{padding:10px 22px;border-radius:30px;border:1px solid var(--line);background:none;color:var(--mut);cursor:pointer;font:500 14px Inter;transition:.3s}
@@ -344,6 +353,26 @@ section{padding:80px 5vw}}
     min-height: 420px;
   }
 }
+
+@media(max-width:900px){
+  #experience{padding-left:5vw;padding-right:5vw}
+  .experience-head{align-items:flex-start}
+  .experience-count{margin-top:44px}
+  .experience-grid{grid-template-columns:1fr;gap:16px}
+  .experience-grid::before{display:none}
+  .experience-grid .card:nth-child(even){margin-left:0}
+  .experience-grid .card{min-height:190px}
+  .experience-note{grid-template-columns:1fr 1fr}
+  .experience-note strong{grid-column:1/-1}
+}
+@media(max-width:600px){
+  .experience-head{display:block}
+  .experience-count{display:inline-block;margin-top:20px}
+  .experience-grid .card{padding:24px 22px;min-height:190px}
+  .experience-grid .card::after{font-size:62px;right:14px}
+  .experience-note{grid-template-columns:1fr;padding:20px;gap:14px}
+  .experience-note strong{grid-column:auto;line-height:1.6}
+}
 </style>
 </head>
 <body>
@@ -385,14 +414,19 @@ section{padding:80px 5vw}}
   <div class="dots" id="dots"></div>
 </section>
 <section id="experience">
-  <div class="eyebrow rv">The Tesla Experience</div>
-  <h2 class="rv">More than a <span class="red">car</span></h2>
-  <p class="experience-intro rv">From the first look to delivery, The key moments of ownership into one streamlined journey.</p>
+  <div class="experience-head">
+    <div class="experience-head-copy">
+      <div class="eyebrow rv">The Tesla Experience</div>
+      <h2 class="rv">More than a <span class="red">car</span></h2>
+      <p class="experience-intro rv">From the first look to delivery, The key moments of ownership into one streamlined journey.</p>
+    </div>
+    <div class="experience-count rv"><b>01—04</b> &nbsp; THE JOURNEY</div>
+  </div>
   <div class="experience-grid">
-    <article class="card rv"><span class="step">01 / DISCOVER</span><h3>Discover</h3><p>Explore distinctive design, electric performance and technology built around the driver.</p></article>
-    <article class="card rv"><span class="step">02 / ORDER</span><h3>Order</h3><p>Configure and purchase online through a direct, straightforward ordering experience.</p></article>
-    <article class="card rv"><span class="step">03 / DRIVE</span><h3>Drive</h3><p>Enjoy responsive performance, connected features and software that can improve over time.</p></article>
-    <article class="card rv"><span class="step">04 / CHARGE</span><h3>Charge</h3><p>Travel with access to the Supercharger network, integrated into the driving experience.</p></article>
+    <article class="card rv" data-number="01"><div><span class="step">01 / DISCOVER</span><h3>Discover</h3><p>Explore distinctive design, electric performance and technology built around the driver.</p></div><div class="experience-card-foot"><b>THE FIRST IMPRESSION</b><i></i></div></article>
+    <article class="card rv" data-number="02"><div><span class="step">02 / ORDER</span><h3>Order</h3><p>Configure and purchase online through a direct, straightforward ordering experience.</p></div><div class="experience-card-foot"><b>A DIRECT PURCHASE</b><i></i></div></article>
+    <article class="card rv" data-number="03"><div><span class="step">03 / DRIVE</span><h3>Drive</h3><p>Enjoy responsive performance, connected features and software that can improve over time.</p></div><div class="experience-card-foot"><b>MADE FOR THE ROAD</b><i></i></div></article>
+    <article class="card rv" data-number="04"><div><span class="step">04 / CHARGE</span><h3>Charge</h3><p>Travel with access to the Supercharger network, integrated into the driving experience.</p></div><div class="experience-card-foot"><b>POWER THE JOURNEY</b><i></i></div></article>
   </div>
   <div class="experience-note rv">
     <strong>One connected ownership experience</strong>
