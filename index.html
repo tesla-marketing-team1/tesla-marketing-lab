@@ -671,41 +671,134 @@ const DB_URL='https://tesla-marketing-default-rtdb.firebaseio.com/';
 const KEY='tesla_vote_v5',N=OPTS.length;
 const admin=/[?&]admin\b/.test(location.search);
 const box=document.getElementById('opts'),pm=document.getElementById('pm'),stat=document.getElementById('status');
+const resetBtn=document.getElementById('reset');
 document.getElementById('adm').style.display=(admin||!DB_URL)?'':'none';
-box.innerHTML=OPTS.map((o,i)=>`<button class="card opt" data-i="${i}"><div class="bar"></div><span class="pct">0%</span><h4><span>${o[0]}</span>${o[1]}</h4><p style="color:var(--mut);font-size:14px;padding-right:44px">${o[2]}</p></button>`).join('');
+box.innerHTML=OPTS.map((o,i)=>'<button class="card opt" data-i="'+i+'"><div class="bar"></div><span class="pct">0%</span><h4><span>'+o[0]+'</span>'+o[1]+'</h4><p style="color:var(--mut);font-size:14px;padding-right:44px">'+o[2]+'</p></button>').join('');
 const btns=[...box.children];
-let counts=Array(N).fill(0),mine=null,live=false,err=false;
+let counts=Array(N).fill(0),mine=null,live=false,streamError='',actionError='',busy=false;
 try{const m=localStorage.getItem(KEY+'_mine');if(m!==null)mine=+m}catch(e){}
 if(!DB_URL){try{const c=JSON.parse(localStorage.getItem(KEY+'_c'));if(Array.isArray(c)&&c.length===N)counts=c}catch(e){}}
 const saveLocal=()=>{try{localStorage.setItem(KEY+'_c',JSON.stringify(counts))}catch(e){}};
 const saveMine=()=>{try{mine===null?localStorage.removeItem(KEY+'_mine'):localStorage.setItem(KEY+'_mine',mine)}catch(e){}};
-function render(){const t=counts.reduce((a,b)=>a+b,0),show=mine!==null||t>0;
+async function readResponse(res){
+ const raw=await res.text();
+ let data=null;
+ try{data=raw?JSON.parse(raw):null}catch(e){data=raw}
+ return data;
+}
+function firebaseError(data,status){
+ const detail=typeof data==='string'?data:(data&&(data.error||data.message));
+ return detail?'Firebase rejected the request (HTTP '+status+'): '+detail:'Firebase request failed (HTTP '+status+').';
+}
+function render(){
+ const t=counts.reduce((a,b)=>a+b,0),show=mine!==null||t>0;
  box.classList.toggle('voted',show);
- btns.forEach((b,i)=>{const p=t?Math.round(counts[i]/t*100):0;b.querySelector('.pct').textContent=p+'%';b.querySelector('.bar').style.width=show?p+'%':'0';b.classList.toggle('mine',mine===i)});
- let msg=t?`${t} vote${t>1?'s':''} counted`+(mine!==null?' \u00b7 You voted':''):'Choose one option to vote.';
- if(DB_URL)msg=err?'Connection lost. Retrying...':(live?'\u25cf Live \u00b7 ':'Connecting... ')+(live?msg:'');
- stat.textContent=msg}
-function apply(d,merge){if(!merge)counts=Array(N).fill(0);if(d)Object.keys(d).forEach(k=>{if(d[k]!==null&&+k<N)counts[+k]=+d[k]||0})}
-if(DB_URL){
+ btns.forEach((b,i)=>{
+  const p=t?Math.round(counts[i]/t*100):0;
+  b.querySelector('.pct').textContent=p+'%';
+  b.querySelector('.bar').style.width=show?p+'%':'0';
+  b.classList.toggle('mine',mine===i);
+  b.disabled=busy||(mine!==null&&!pm.checked);
+ });
+ if(resetBtn)resetBtn.disabled=busy;
+ const summary=t? t+' vote'+(t===1?'':'s')+' counted'+(mine!==null?' · You voted':''):'Choose one option to vote.';
+ stat.textContent=actionError||streamError||(live?'● Live · '+summary:'Connecting to live vote counts…');
+}
+function apply(d,merge){
+ if(!merge)counts=Array(N).fill(0);
+ if(d&&typeof d==='object')Object.keys(d).forEach(k=>{
+  const i=Number(k);
+  if(Number.isInteger(i)&&i>=0&&i<N)counts[i]=Number(d[k])||0;
+ });
+}
+function startStream(){
  const es=new EventSource(DB_URL.replace(/\/$/,'')+'/audience_decision_v5.json');
- es.addEventListener('put',e=>{const d=JSON.parse(e.data);live=true;err=false;
-  if(d.path==='/')apply(d.data,false);else{const i=+d.path.replace(/^\//,'').split('/').pop();if(i<N)counts[i]=+d.data||0}render()});
- es.addEventListener('patch',e=>{const d=JSON.parse(e.data);live=true;err=false;apply(d.data,true);render()});
- es.onerror=()=>{err=true;render()};
+ es.addEventListener('put',e=>{
+  try{
+   const d=JSON.parse(e.data);live=true;streamError='';
+   if(d.path==='/')apply(d.data,false);
+   else{
+    const i=Number(d.path.replace(/^\//,'').split('/').pop());
+    if(Number.isInteger(i)&&i>=0&&i<N)counts[i]=Number(d.data)||0;
+   }
+   render();
+  }catch(error){streamError='Received an unreadable update from Firebase.';render();}
+ });
+ es.addEventListener('patch',e=>{
+  try{const d=JSON.parse(e.data);live=true;streamError='';apply(d.data,true);render();}
+  catch(error){streamError='Received an unreadable update from Firebase.';render();}
+ });
+ es.addEventListener('cancel',e=>{
+  let reason='Firebase stopped the live vote feed.';
+  try{const detail=JSON.parse(e.data);if(typeof detail==='string')reason=detail;else if(detail)reason=detail.error||detail.message||reason;}catch(error){}
+  streamError=reason.toLowerCase().includes('permission denied')?'Firebase denied live reads. Check the database read rules.':'Live vote feed stopped: '+reason;
+  live=false;es.close();render();
+ });
+ es.onerror=()=>{
+  live=false;
+  if(!streamError)streamError='Live updates disconnected. The browser will retry automatically.';
+  render();
+ };
+}
+async function initializeVoting(){
+ try{
+  const res=await fetch(DB_URL.replace(/\/$/,'')+'/audience_decision_v5.json',{cache:'no-store'});
+  const data=await readResponse(res);
+  if(!res.ok)throw new Error(firebaseError(data,res.status));
+  apply(data,false);
+ }catch(error){
+  streamError='Unable to load vote counts: '+(error.message||'network error');
+ }
+ render();
+ startStream();
 }
 btns.forEach((b,i)=>b.onclick=async()=>{
- if(mine!==null&&!pm.checked)return;
- if(DB_URL){
-  try{await fetch(DB_URL.replace(/\/$/,'')+'/audience_decision_v5/'+i+'.json',{method:'PUT',body:JSON.stringify({'.sv':{increment:1}})})}catch(e){err=true;render();return}
- }else{counts[i]++;saveLocal()}
- if(!pm.checked){mine=i;saveMine()}
- render()});
-document.getElementById('reset').onclick=async()=>{
- if(DB_URL){try{await fetch(DB_URL.replace(/\/$/,'')+'/audience_decision_v5.json',{method:'PUT',body:JSON.stringify(Array(N).fill(0))})}catch(e){}}
- else{counts=Array(N).fill(0);saveLocal()}
- mine=null;saveMine();render()};
-render();
-/* ---- charging animation ---- */
+ if(busy||(mine!==null&&!pm.checked))return;
+ busy=true;actionError='';render();
+ try{
+  if(DB_URL){
+   const res=await fetch(DB_URL.replace(/\/$/,'')+'/audience_decision_v5/'+i+'.json',{
+    method:'PUT',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({'.sv':{increment:1}})
+   });
+   const data=await readResponse(res);
+   if(!res.ok)throw new Error(firebaseError(data,res.status));
+  }else{
+   counts[i]++;saveLocal();
+  }
+  if(!pm.checked){mine=i;saveMine();}
+ }catch(error){
+  actionError='Vote not submitted: '+(error.message||'network error')+' Please try again.';
+ }finally{
+  busy=false;render();
+ }
+});
+if(pm)pm.addEventListener('change',render);
+if(resetBtn)resetBtn.onclick=async()=>{
+ if(busy)return;
+ busy=true;actionError='';render();
+ try{
+  if(DB_URL){
+   const res=await fetch(DB_URL.replace(/\/$/,'')+'/audience_decision_v5.json',{
+    method:'PUT',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(Array(N).fill(0))
+   });
+   const data=await readResponse(res);
+   if(!res.ok)throw new Error(firebaseError(data,res.status));
+   apply(data,false);
+  }else{
+   counts=Array(N).fill(0);saveLocal();
+  }
+  mine=null;saveMine();
+ }catch(error){
+  actionError='Reset failed: '+(error.message||'network error')+'. Existing votes were not cleared.';
+ }finally{
+  busy=false;render();
+ }
+};
+initializeVoting();/* ---- charging animation ---- */
 (() => {
   const scene = document.getElementById('chargeScene');
   if (!scene) return;
