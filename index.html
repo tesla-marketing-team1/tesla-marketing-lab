@@ -56,6 +56,9 @@ mask-image:linear-gradient(90deg,transparent 0,#000 32%),linear-gradient(180deg,
 .dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red)}
 /* strategy */
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.experience-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;max-width:900px;margin:0 auto}
+.experience-grid .card{aspect-ratio:1/1;display:flex;flex-direction:column;justify-content:center;padding:clamp(22px,4vw,48px)}
+.experience-grid .card h3{font-size:15px}
 .num{font-family:Michroma;color:var(--red);font-size:13px;margin-bottom:14px}
 .card h4{font-size:17px;font-weight:500;margin-bottom:8px}
 /* 4P */
@@ -119,7 +122,7 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:50px 5vw 60px;b
 @media(max-width:900px){
 .links{position:fixed;top:60px;left:0;right:0;flex-direction:column;background:rgba(9,9,11,.97);padding:20px 5vw;gap:16px;transform:translateY(-130%);transition:transform .4s var(--ease);border-bottom:1px solid var(--line)}
 .links.open{transform:none}.burger{display:block}nav .btn{display:none}
-#home{grid-template-columns:1fr;padding-top:110px}.hero-img{width:170%;right:-45%;top:90px;opacity:.3}.intro,.grid3,.swot{grid-template-columns:1fr}.opts{grid-template-columns:1fr}
+#home{grid-template-columns:1fr;padding-top:110px}.hero-img{width:170%;right:-45%;top:90px;opacity:.3}.intro,.grid3,.swot,.experience-grid{grid-template-columns:1fr}.experience-grid .card{aspect-ratio:auto;min-height:220px}.opts{grid-template-columns:1fr}
 .showcase{grid-template-columns:1fr}.stage{grid-template-columns:1fr}.arrow{display:flex;align-items:center;justify-content:center;min-width:48px;min-height:48px;cursor:pointer;touch-action:manipulation}
 section{padding:80px 5vw}}
 /* Responsive layout improvements */
@@ -370,7 +373,7 @@ section{padding:80px 5vw}}
   </div>
   <div class="dots" id="dots"></div>
 </section>
-<section id="experience"><div class="eyebrow rv">The Tesla Experience</div><h2 class="rv">More than a <span class="red">car</span></h2><p class="lead rv">A connected journey from discovering the vehicle to driving and charging it.</p><div class="grid3"><article class="card rv"><div class="num">01 / DISCOVER</div><h3>Discover</h3><p>Distinctive design, performance and technology introduce the Tesla experience.</p></article><article class="card rv"><div class="num">02 / ORDER</div><h3>Order</h3><p>Configure a vehicle online and order directly, without the traditional dealership process.</p></article><article class="card rv"><div class="num">03 / DRIVE</div><h3>Drive</h3><p>Electric performance, connected features and software updates shape everyday ownership.</p></article><article class="card rv"><div class="num">04 / CHARGE</div><h3>Charge</h3><p>The Supercharger network makes charging part of the wider ownership experience.</p></article></div></section>
+<section id="experience"><div class="eyebrow rv">The Tesla Experience</div><h2 class="rv">More than a <span class="red">car</span></h2><p class="lead rv">A connected journey from discovering the vehicle to driving and charging it.</p><div class="experience-grid"><article class="card rv"><h3>Discover</h3><p>Distinctive design, performance and technology introduce the Tesla experience.</p></article><article class="card rv"><h3>Order</h3><p>Configure a vehicle online and order directly, without the traditional dealership process.</p></article><article class="card rv"><h3>Drive</h3><p>Electric performance, connected features and software updates shape everyday ownership.</p></article><article class="card rv"><h3>Charge</h3><p>The Supercharger network makes charging part of the wider ownership experience.</p></article></div></section>
 
 <section id="charging" class="charge-section">
   <div class="eyebrow rv">The charging experience</div>
