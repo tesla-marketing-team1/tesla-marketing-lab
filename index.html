@@ -285,15 +285,17 @@ section{padding:80px 5vw}}
 .charge-scene.charging #cableFlow{opacity:1;animation:flow .7s linear infinite}
 .charge-scene #lights{opacity:0;transition:opacity .5s}
 .charge-scene.lights #lights{opacity:1}
-.charge-scene.charging{background:radial-gradient(ellipse at 54% 82%,rgba(61,220,151,.15),transparent 34%),radial-gradient(ellipse at 50% 100%,rgba(227,25,55,.3),transparent 60%),linear-gradient(#141419,#08080a)}
+.charge-scene::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 54% 82%,rgba(61,220,151,.17),transparent 34%),radial-gradient(ellipse at 70% 78%,rgba(227,25,55,.34),transparent 46%),linear-gradient(110deg,rgba(17,17,22,.55),rgba(9,9,12,.1) 65%,rgba(24,10,14,.65));transition:opacity 2s cubic-bezier(.2,.7,.2,1)}
+.charge-scene.charging::before{opacity:.78}
+.charge-scene.complete::before{opacity:1}
+.charge-scene svg{position:relative;z-index:1}
 .charge-scene.charging .floor{filter:drop-shadow(0 0 12px rgba(61,220,151,.8))}
-.charge-scene.complete{background:radial-gradient(ellipse at 70% 78%,rgba(227,25,55,.34),transparent 42%),linear-gradient(110deg,#111116,#09090c 65%,#180a0e)}
-.charge-scene.complete #carG{filter:drop-shadow(0 0 14px rgba(227,25,55,.45))}
-.charge-scene.complete #lights{opacity:1;filter:drop-shadow(0 0 16px rgba(255,255,255,.8))}
-.charge-scene.complete #portGlow{opacity:1;fill:#3ddc97}
-.charge-scene.complete .floor{opacity:1;filter:drop-shadow(0 0 18px rgba(227,25,55,.9))}
+.charge-scene.complete #carG{filter:drop-shadow(0 0 14px rgba(227,25,55,.45));transition:filter 1.8s ease}
+.charge-scene.complete #lights{opacity:1;filter:drop-shadow(0 0 16px rgba(255,255,255,.8));transition:opacity 1.6s ease,filter 1.8s ease}
+.charge-scene.complete #portGlow{opacity:1;fill:#3ddc97;transition:opacity 1.4s ease}
+.charge-scene.complete .floor{opacity:1;filter:drop-shadow(0 0 18px rgba(227,25,55,.9));transition:opacity 1.8s ease,filter 1.8s ease}
 .charge-scene.complete #led{fill:#3ddc97}
-.charge-scene #plug{transition:filter .35s}
+.charge-scene #plug{transition:filter .7s ease}
 .charge-scene.connected #plug{filter:drop-shadow(0 0 7px rgba(61,220,151,.8))}
 @keyframes flow{to{stroke-dashoffset:-32}}
 @keyframes ledPulse{50%{opacity:.45}}
@@ -779,26 +781,24 @@ render();
     state.textContent = 'CHARGING';
     if (!await ok(tween(5200, p => setBattery(Math.round(p * 100)), token))) return;
 
-    // 4. full charge: hold on the finished car with a cinematic light reveal
+    // 4. full charge: let the completed scene and vehicle lighting fade in naturally
     scene.classList.remove('charging');
     scene.classList.add('complete', 'lights');
     state.textContent = '100% · CHARGING COMPLETE';
     scr.textContent = '100%';
-    if (!await ok(wait(1800))) return;
+    if (!await ok(wait(2400))) return;
 
-    // 5. unplug, then let the fully charged car make a dramatic departure
+    // 5. unplug, pause, then accelerate fully out of the scene
     state.textContent = 'UNPLUGGING';
     scene.classList.remove('connected');
-    if (!await ok(tween(1100, p => setCable(1 - p), token))) return;
-    if (!await ok(wait(450))) return;
+    if (!await ok(tween(1300, p => setCable(1 - p), token))) return;
+    if (!await ok(wait(550))) return;
     state.textContent = 'READY FOR THE ROAD';
-    if (!await ok(tween(1900, p => {
+    if (!await ok(tween(3200, p => {
       const e = p * p * (1.6 - .6 * p);
-      const dist = e * 360;
+      const dist = e * 1120;
       setCar(CAR_X + dist, dist / (2 * Math.PI * 34) * 360);
     }, token))) return;
-    // Keep the final illuminated car in frame instead of letting it vanish off-screen.
-    setCar(CAR_X + 360, 360 / (2 * Math.PI * 34) * 360);
   }
 
   replay.addEventListener('click', play);
