@@ -470,7 +470,6 @@ section{padding:80px 5vw}}
       <line x1="0" y1="310" x2="760" y2="310" stroke="#3a3a42" stroke-width="1.5"/>
 
       <!-- Dark, sculpted Tesla Supercharger stall with a prominent red T emblem -->
-      <g transform="translate(22.5 0) scale(.7 1)">
       <ellipse cx="73" cy="312" rx="43" ry="6" fill="#000" opacity=".58"/>
       <path d="M48 309V137Q48 119 62 111L75 103Q87 97 96 110L103 130V309Z" fill="#17181d" stroke="#45464e" stroke-width="1.5"/>
       <path d="M52 137Q52 121 65 114L76 107Q86 102 93 114L99 133V305H52Z" fill="#24252b"/>
@@ -484,7 +483,6 @@ section{padding:80px 5vw}}
       <path d="M58 291H95V301Q95 305 90 305H63Q58 305 58 301Z" fill="#111216" stroke="#34353d" stroke-width="1"/>
       <rect x="34" y="304" width="74" height="6" rx="3" fill="#222228"/>
 
-      </g>
 
       <!-- car -->
       <g id="carG" transform="translate(250 20)">
@@ -509,10 +507,10 @@ section{padding:80px 5vw}}
       </g>
 
       <!-- cable + plug (drawn above the car so the connection is visible) -->
-      <path id="cableOut" fill="none" stroke="#050507" stroke-width="7" stroke-linecap="round"/>
-      <path id="cableIn" fill="none" stroke="#3d3d46" stroke-width="4" stroke-linecap="round"/>
-      <path id="cableFlow" fill="none" stroke="#e31937" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="4 12" filter="url(#glow)"/>
-      <g id="plug">
+      <path id="cableOut" fill="none" stroke="#050507" stroke-width="4.5" stroke-linecap="round"/>
+      <path id="cableIn" fill="none" stroke="#3d3d46" stroke-width="2.6" stroke-linecap="round"/>
+      <path id="cableFlow" fill="none" stroke="#e31937" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 12" filter="url(#glow)"/>
+      <g id="plug" transform="scale(.72)">
         <rect x="-30" y="-8" width="24" height="16" rx="5" fill="#2e2e35" stroke="#62626c"/>
         <rect x="-26" y="-2" width="12" height="3" rx="1.5" fill="#e31937"/>
         <rect x="-6" y="-5" width="9" height="10" rx="2" fill="#cfcfd5"/>
@@ -743,7 +741,6 @@ render();
   function setBattery(n) {
     fill.style.width = n + '%';
     pct.textContent = n + '%';
-    scr.textContent = n >= 100 ? 'FULL' : n + '%';
   }
 
   function reset() {
@@ -792,7 +789,6 @@ render();
     scene.classList.remove('charging');
     scene.classList.add('complete', 'lights');
     state.textContent = '100% · CHARGING COMPLETE';
-    scr.textContent = '100%';
     if (!await ok(wait(2400))) return;
 
     // 5. unplug, pause, then accelerate fully out of the scene
