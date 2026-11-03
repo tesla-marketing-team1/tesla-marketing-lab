@@ -675,7 +675,7 @@ const resetBtn=document.getElementById('reset');
 document.getElementById('adm').style.display=(admin||!DB_URL)?'':'none';
 box.innerHTML=OPTS.map((o,i)=>'<button class="card opt" data-i="'+i+'"><div class="bar"></div><span class="pct">0%</span><h4><span>'+o[0]+'</span>'+o[1]+'</h4><p style="color:var(--mut);font-size:14px;padding-right:44px">'+o[2]+'</p></button>').join('');
 const btns=[...box.children];
-let counts=Array(N).fill(0),mine=null,live=false,streamError='',actionError='',busy=false;
+let counts=Array(N).fill(0),mine=null,live=false,streamError='',actionError='',voteBusy=false;
 try{const m=localStorage.getItem(KEY+'_mine');if(m!==null)mine=+m}catch(e){}
 if(!DB_URL){try{const c=JSON.parse(localStorage.getItem(KEY+'_c'));if(Array.isArray(c)&&c.length===N)counts=c}catch(e){}}
 const saveLocal=()=>{try{localStorage.setItem(KEY+'_c',JSON.stringify(counts))}catch(e){}};
@@ -698,9 +698,9 @@ function render(){
   b.querySelector('.pct').textContent=p+'%';
   b.querySelector('.bar').style.width=show?p+'%':'0';
   b.classList.toggle('mine',mine===i);
-  b.disabled=busy||(mine!==null&&!pm.checked);
+  b.disabled=voteBusy||(mine!==null&&!pm.checked);
  });
- if(resetBtn)resetBtn.disabled=busy;
+ if(resetBtn)resetBtn.disabled=voteBusy;
  const summary=t? t+' vote'+(t===1?'':'s')+' counted'+(mine!==null?' · You voted':''):'Choose one option to vote.';
  stat.textContent=actionError||streamError||(live?'● Live · '+summary:'Connecting to live vote counts…');
 }
@@ -753,8 +753,8 @@ async function initializeVoting(){
  startStream();
 }
 btns.forEach((b,i)=>b.onclick=async()=>{
- if(busy||(mine!==null&&!pm.checked))return;
- busy=true;actionError='';render();
+ if(voteBusy||(mine!==null&&!pm.checked))return;
+ voteBusy=true;actionError='';render();
  try{
   if(DB_URL){
    const res=await fetch(DB_URL.replace(/\/$/,'')+'/audience_decision_v5/'+i+'.json',{
@@ -771,13 +771,13 @@ btns.forEach((b,i)=>b.onclick=async()=>{
  }catch(error){
   actionError='Vote not submitted: '+(error.message||'network error')+' Please try again.';
  }finally{
-  busy=false;render();
+  voteBusy=false;render();
  }
 });
 if(pm)pm.addEventListener('change',render);
 if(resetBtn)resetBtn.onclick=async()=>{
- if(busy)return;
- busy=true;actionError='';render();
+ if(voteBusy)return;
+ voteBusy=true;actionError='';render();
  try{
   if(DB_URL){
    const res=await fetch(DB_URL.replace(/\/$/,'')+'/audience_decision_v5.json',{
@@ -795,7 +795,7 @@ if(resetBtn)resetBtn.onclick=async()=>{
  }catch(error){
   actionError='Reset failed: '+(error.message||'network error')+'. Existing votes were not cleared.';
  }finally{
-  busy=false;render();
+  voteBusy=false;render();
  }
 };
 initializeVoting();/* ---- charging animation ---- */
