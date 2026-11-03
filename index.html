@@ -729,7 +729,7 @@ render();
   function setCable(t) {
     const e = ease(t);
     const tip = {
-      x: lerp(HOLSTER.x, PORT.x + 1.5, e),
+      x: lerp(HOLSTER.x, PORT.x - 6.5, e),
       y: lerp(HOLSTER.y, PORT.y, e) - Math.sin(Math.PI * t) * 55
     };
     const rear = { x: tip.x - PLUG_LEN, y: tip.y };
