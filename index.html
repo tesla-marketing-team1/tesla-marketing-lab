@@ -468,7 +468,7 @@ section{padding:80px 5vw}}
   <h2 class="rv">You are the <span class="red">CMO</span></h2>
   <div class="scenario rv">
     <span class="badge">HYPOTHETICAL SCENARIO</span>
-    <p>A video of a Tesla driver-assistance malfunction goes viral and is shared millions of times. Regulators open an inquiry, the media pile on, and online orders slow down in key markets. Tesla has to respond within the week. <b>What is the best marketing response?</b></p>
+    <p>Competition in the electric-vehicle market is growing as established automakers introduce new models. More consumers are considering their first EV, but many are unsure which brand to trust. <b>How should Tesla strengthen its appeal to first-time EV buyers?</b></p>
   </div>
   <div class="opts rv" id="opts"></div>
   <div class="vfoot rv">
@@ -581,12 +581,12 @@ fill(0);
 
 /* ---- class vote ---- */
 const OPTS=[
- ['A','Radical transparency','Publish the full investigation, apologise publicly, and push a free software fix to every car.'],
- ['B','Price and incentive push','Keep the message on the product: cut prices, add free charging and extend warranties to win back buyers.'],
- ['C','Change the narrative','Launch a sustainability and innovation campaign, using owner stories and ambassadors to shift focus.']
+ ['A','Show the everyday value','Use clear, comparison-led campaigns to demonstrate range, charging convenience, technology and long-term ownership value.'],
+ ['B','Build trust through owners','Put real customer experiences at the centre of the message, supported by transparent communication and a stronger service experience.'],
+ ['C','Make the first step easier','Bring more people into the brand through test-drive events, local experiences and wider charging partnerships.']
 ];
 const DB_URL='https://tesla-marketing-default-rtdb.firebaseio.com/';
-const KEY='tesla_vote_v2',N=OPTS.length;
+const KEY='tesla_vote_v3',N=OPTS.length;
 const admin=/[?&]admin\b/.test(location.search);
 const box=document.getElementById('opts'),pm=document.getElementById('pm'),stat=document.getElementById('status');
 document.getElementById('adm').style.display=(admin||!DB_URL)?'':'none';
@@ -605,21 +605,21 @@ function render(){const t=counts.reduce((a,b)=>a+b,0),show=mine!==null||t>0;
  stat.textContent=msg}
 function apply(d,merge){if(!merge)counts=Array(N).fill(0);if(d)Object.keys(d).forEach(k=>{if(d[k]!==null&&+k<N)counts[+k]=+d[k]||0})}
 if(DB_URL){
- const es=new EventSource(DB_URL.replace(/\/$/,'')+'/counts.json');
+ const es=new EventSource(DB_URL.replace(/\/$/,'')+'/audience_decision_v3.json');
  es.addEventListener('put',e=>{const d=JSON.parse(e.data);live=true;err=false;
-  if(d.path==='/')apply(d.data,false);else{const i=+d.path.slice(1);if(i<N)counts[i]=+d.data||0}render()});
+  if(d.path==='/')apply(d.data,false);else{const i=+d.path.replace(/^\//,'').split('/').pop();if(i<N)counts[i]=+d.data||0}render()});
  es.addEventListener('patch',e=>{const d=JSON.parse(e.data);live=true;err=false;apply(d.data,true);render()});
  es.onerror=()=>{err=true;render()};
 }
 btns.forEach((b,i)=>b.onclick=async()=>{
  if(mine!==null&&!pm.checked)return;
  if(DB_URL){
-  try{await fetch(DB_URL.replace(/\/$/,'')+'/counts/'+i+'.json',{method:'PUT',body:JSON.stringify({'.sv':{increment:1}})})}catch(e){err=true;render();return}
+  try{await fetch(DB_URL.replace(/\/$/,'')+'/audience_decision_v3/'+i+'.json',{method:'PUT',body:JSON.stringify({'.sv':{increment:1}})})}catch(e){err=true;render();return}
  }else{counts[i]++;saveLocal()}
  if(!pm.checked){mine=i;saveMine()}
  render()});
 document.getElementById('reset').onclick=async()=>{
- if(DB_URL){try{await fetch(DB_URL.replace(/\/$/,'')+'/counts.json',{method:'PUT',body:JSON.stringify(Array(N).fill(0))})}catch(e){}}
+ if(DB_URL){try{await fetch(DB_URL.replace(/\/$/,'')+'/audience_decision_v3.json',{method:'PUT',body:JSON.stringify(Array(N).fill(0))})}catch(e){}}
  else{counts=Array(N).fill(0);saveLocal()}
  mine=null;saveMine();render()};
 render();
